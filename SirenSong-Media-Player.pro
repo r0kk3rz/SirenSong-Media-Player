@@ -12,12 +12,14 @@
 # The name of your application
 TARGET = SirenSong-Media-Player
 
-CONFIG += sailfishapp
+CONFIG += sailfishapp \
+            qtsparql
 
 QT += multimedia
 
 SOURCES += src/SirenSong-Media-Player.cpp \
-    src/mediaplayer.cpp
+    src/mediaplayer.cpp \
+    src/trackerinterface.cpp
 
 OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/cover/CoverPage.qml \
@@ -37,5 +39,6 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/SirenSong-Media-Player-de.ts
 
 HEADERS += \
-    src/mediaplayer.h
+    src/mediaplayer.h \
+    src/trackerinterface.h
 

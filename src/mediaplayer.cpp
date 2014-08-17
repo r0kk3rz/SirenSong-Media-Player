@@ -1,20 +1,24 @@
 #include "mediaplayer.h"
 #include <QtMultimedia>
+#include "trackerinterface.h"
 
 MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
 {
     playlist = new QMediaPlaylist;
     player = new QMediaPlayer;
+    tracker = new trackerinterface;
 
     player->setPlaylist(playlist);
     iPlaybackStatus = 0;
     iPosition = 0;
     iDuration = 0;
+    sCurrentResultsQuery = "";
 
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
-    QObject::connect(playlist, &QMediaPlaylist::currentMediaChanged, this, &MediaPlayer::setCurrentContent);
+    QObject::connect(player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::setCurrentContent);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
+    QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::randomItemComplete);
 }
 
 void MediaPlayer :: play()
@@ -24,7 +28,7 @@ void MediaPlayer :: play()
 
 void MediaPlayer :: play(QString url)
 {
-    playlist->addMedia(QUrl(url));
+    this->addToPlaylist(url);
 
     playlist->setCurrentIndex((playlist->mediaCount() - 1));
 
@@ -76,6 +80,8 @@ void MediaPlayer :: setCurrentContent(QMediaContent content)
 {
     qCurrentContent = content;
     emit currentContentChanged();
+    checkPlaylist();
+    qDebug("currentContentChanged");
 }
 
 
@@ -99,3 +105,28 @@ void MediaPlayer :: setPosition(qint64 position)
     emit positionChanged();
 }
 
+void MediaPlayer :: checkPlaylist()
+{
+    //check if current item is the last in list
+    if(playlist->currentIndex() == (playlist->mediaCount() -1))
+    {
+        //insert random item next
+        tracker->randomItem();
+    }
+
+    //cleanup task so list doesnt get too big
+    if(playlist->mediaCount() >= 50)
+    {
+        //make sure we arent removing the current media
+        if(playlist->currentIndex() != 0)
+        {
+            playlist->removeMedia(0);
+        }
+    }
+}
+
+//async callback handler for tracker
+void MediaPlayer :: randomItemComplete(QString url)
+{
+    this->addToPlaylist(url);
+}

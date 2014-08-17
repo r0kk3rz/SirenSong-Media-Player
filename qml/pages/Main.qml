@@ -25,12 +25,6 @@ Page {
 
     MediaPlayer {
         id: player
-        onPositionChanged: console.log("position: " + position)
-        onDurationChanged: console.log("duration: " + duration)
-    }
-
-    QMediaPlayer {
-        id: qPlayer
     }
 
     Drawer {
@@ -105,12 +99,12 @@ Page {
 
 
                     Label {
-                        text: " "
+                        text: "Title"
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
 
                     Label {
-                        text: " "
+                        text: "Artist"
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -122,7 +116,7 @@ Page {
                         minimumValue: 0
                         maximumValue: player.duration
                         enabled: false
-                        width: parent.width
+                        width: parent.width / 9
                         handleVisible: true
                     }
 
@@ -136,13 +130,15 @@ Page {
                         width: parent.width / 4
                         anchors.verticalCenter: parent.verticalCenter
                     }
+
                     IconButton {
-                        id: pause
+                        id: stop
                         icon.source: "image://theme/icon-l-clear"
                         onClicked: player.stop()
                         width: parent.width / 4
                         anchors.verticalCenter: parent.verticalCenter
                     }
+
                     IconButton {
                         id: play
                         icon.source: player.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
@@ -150,6 +146,7 @@ Page {
                         width: parent.width / 4
                         anchors.verticalCenter: parent.verticalCenter
                     }
+
                     IconButton {
                         id: next
                         icon.source: "image://theme/icon-m-next"
