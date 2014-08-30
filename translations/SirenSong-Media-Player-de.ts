@@ -7,10 +7,6 @@
         <source>My Cover</source>
         <translation type="obsolete">Mein Cover</translation>
     </message>
-    <message>
-        <source>SirenSong</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>FirstPage</name>

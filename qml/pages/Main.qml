@@ -23,15 +23,11 @@ Page {
                + "?malbum nmm:albumTitle ?album " + "} " + "LIMIT 100"
     }
 
-    MediaPlayer {
-        id: player
-    }
-
     Drawer {
         id: playerMenu
         anchors.fill: parent
         dock: Dock.Bottom
-        open: player.playbackStatus >=1 ? true : false
+        open: SirenSong.playbackStatus >=1 ? true : false
 
         foreground: SilicaFlickable {
             width: parent ? parent.width : Screen.width
@@ -46,7 +42,7 @@ Page {
                 listDelegate: BackgroundItem {
                     width: parent.width
                     id: songList
-                    onClicked: player.play(url)
+                    onClicked: SirenSong.play(url)
 
                     function durationString(length)
                     {
@@ -99,12 +95,12 @@ Page {
 
 
                     Label {
-                        text: "Title"
+                        text: SirenSong.title;
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
 
                     Label {
-                        text: "Artist"
+                        text: SirenSong.artist;
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -112,11 +108,11 @@ Page {
 
                     Slider {
                         id: progressSlider
-                        value: player.position
+                        value: Math.floor(SirenSong.position / 1000)
                         minimumValue: 0
-                        maximumValue: player.duration
+                        maximumValue: Math.floor(SirenSong.duration / 1000)
                         enabled: false
-                        width: parent.width / 9
+                        width: parent.width
                         handleVisible: true
                     }
 
@@ -126,7 +122,7 @@ Page {
                     IconButton {
                         id: previous
                         icon.source: "image://theme/icon-m-previous"
-                        onClicked: player.previous()
+                        onClicked: SirenSong.previous()
                         width: parent.width / 4
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -134,15 +130,15 @@ Page {
                     IconButton {
                         id: stop
                         icon.source: "image://theme/icon-l-clear"
-                        onClicked: player.stop()
+                        onClicked: SirenSong.stop()
                         width: parent.width / 4
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
                     IconButton {
                         id: play
-                        icon.source: player.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
-                        onClicked: player.playbackStatus === 1 ? player.pause() : player.play()
+                        icon.source: SirenSong.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
+                        onClicked: SirenSong.playbackStatus === 1 ? SirenSong.pause() : SirenSong.play()
                         width: parent.width / 4
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -150,7 +146,7 @@ Page {
                     IconButton {
                         id: next
                         icon.source: "image://theme/icon-m-next"
-                        onClicked: player.next()
+                        onClicked: SirenSong.next()
                         width: parent.width / 4
                         anchors.verticalCenter: parent.verticalCenter
                     }

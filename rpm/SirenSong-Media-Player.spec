@@ -6,6 +6,7 @@
 Name:       SirenSong-Media-Player
 
 # >> macros
+%define __requires_exclude ^libQt5Sparql.*$
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}

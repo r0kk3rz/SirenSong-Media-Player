@@ -1,6 +1,7 @@
 #include "mediaplayer.h"
 #include <QtMultimedia>
 #include "trackerinterface.h"
+#include <QMediaMetaData>
 
 MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
 {
@@ -13,12 +14,17 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     iPosition = 0;
     iDuration = 0;
     sCurrentResultsQuery = "";
+    mediaArtist = "Artist";
+    mediaTitle = "Title";
 
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
     QObject::connect(player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::setCurrentContent);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
     QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::randomItemComplete);
+
+    //old connect syntax due to overloaded metaDataChanged signal
+    QObject::connect(player, SIGNAL(metaDataChanged(QString&,QVariant&)), this, SLOT(metaDataCallback(QString&,QVariant&)));
 }
 
 void MediaPlayer :: play()
@@ -38,7 +44,9 @@ void MediaPlayer :: play(QString url)
 void MediaPlayer :: next()
 {
     if(playlist->currentIndex() < (playlist->mediaCount() -1))
+    {
         playlist->next();
+    }
 }
 
 void MediaPlayer :: previous()
@@ -84,6 +92,26 @@ void MediaPlayer :: setCurrentContent(QMediaContent content)
     qDebug("currentContentChanged");
 }
 
+const QString &MediaPlayer :: title ( ) {
+    return mediaTitle;
+}
+
+void MediaPlayer :: setTitle(QString title)
+{
+    mediaTitle = title;
+    emit titleChanged();
+}
+
+const QString &MediaPlayer :: artist ( ) {
+    return mediaArtist;
+}
+
+void MediaPlayer :: setArtist(QString artist)
+{
+    mediaArtist = artist;
+    emit artistChanged();
+}
+
 
 const qint64 &MediaPlayer :: duration ( ) {
     return iDuration;
@@ -114,19 +142,33 @@ void MediaPlayer :: checkPlaylist()
         tracker->randomItem();
     }
 
+    qDebug() << "mediaCount: " << playlist->mediaCount();
+
     //cleanup task so list doesnt get too big
-    if(playlist->mediaCount() >= 50)
-    {
+    //if(playlist->mediaCount() >= 50)
+    //{
         //make sure we arent removing the current media
-        if(playlist->currentIndex() != 0)
-        {
-            playlist->removeMedia(0);
-        }
-    }
+      //  if(playlist->currentIndex() != 0)
+        //{
+          //  playlist->removeMedia(0);
+        //}
+    //}
 }
 
 //async callback handler for tracker
 void MediaPlayer :: randomItemComplete(QString url)
 {
     this->addToPlaylist(url);
+}
+
+void MediaPlayer :: metaDataCallback(QString &key, QVariant &value)
+{
+    qDebug() << "metadatakey: " << key;
+    qDebug() << "metadatavalue: " << value.toString();
+
+    if(key == QMediaMetaData::Title)
+        setTitle(value.toString());
+        
+    if(key == QMediaMetaData::AlbumArtist)
+        setArtist((value.toString()));
 }
