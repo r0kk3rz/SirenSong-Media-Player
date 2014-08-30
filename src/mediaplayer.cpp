@@ -21,10 +21,12 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     QObject::connect(player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::setCurrentContent);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
+    //QObject::connect(player, &QMediaObject::metaDataAvailableChanged, this, &MediaPlayer::metaDataAvailableCallback);
+
+    QObject::connect(player, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableCallback(bool)));
+
     QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::randomItemComplete);
 
-    //old connect syntax due to overloaded metaDataChanged signal
-    QObject::connect(player, SIGNAL(metaDataChanged(QString&,QVariant&)), this, SLOT(metaDataCallback(QString&,QVariant&)));
 }
 
 void MediaPlayer :: play()
@@ -131,6 +133,9 @@ void MediaPlayer :: setPosition(qint64 position)
 {
     iPosition = position;
     emit positionChanged();
+
+    //hack hack hack, needs doing properly
+    metaDataAvailableCallback(player->isMetaDataAvailable());
 }
 
 void MediaPlayer :: checkPlaylist()
@@ -159,6 +164,16 @@ void MediaPlayer :: checkPlaylist()
 void MediaPlayer :: randomItemComplete(QString url)
 {
     this->addToPlaylist(url);
+}
+
+void MediaPlayer :: metaDataAvailableCallback(bool available)
+{
+    qDebug() << "metaDataAvailable: " << available;
+    if(available)
+    {
+        setTitle(player->metaData(QMediaMetaData::Title).toString());
+        setArtist(player->metaData(QMediaMetaData::AlbumArtist).toString());
+    }
 }
 
 void MediaPlayer :: metaDataCallback(QString &key, QVariant &value)

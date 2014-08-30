@@ -64,6 +64,7 @@ private slots:
     void checkPlaylist();
     void randomItemComplete(QString url);
     void metaDataCallback(QString &key, QVariant &value);
+    void metaDataAvailableCallback(bool available);
 };
 
 #endif // MEDIAPLAYER_H
