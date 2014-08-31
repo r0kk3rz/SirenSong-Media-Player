@@ -7,7 +7,6 @@ Column {
     property Component listDelegate: listDelegate
     property SparqlListModel dataSource: data
 
-    width: parent.width
     id: contentColumn
 
         AlphaMenuGroupView {

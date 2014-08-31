@@ -67,7 +67,7 @@ SilicaFlickable {
             contentHeight: Math.max(1, alphaMenu.height)
 
 
-            PageHeader { title: "SirenSong" }
+            PageHeader { title: "Song Library" }
 
 
             AlphaMenu {

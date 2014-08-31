@@ -31,7 +31,8 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/Main.qml \
     qml/pages/AlphaMenu.qml \
     qml/pages/AlphaMenuGroupView.qml \
-    qml/pages/AlphaMenuGroup.qml
+    qml/pages/AlphaMenuGroup.qml \
+    qml/pages/PlayerPage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

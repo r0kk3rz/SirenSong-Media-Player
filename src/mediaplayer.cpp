@@ -18,12 +18,13 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     mediaTitle = "Title";
 
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
-    QObject::connect(player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::setCurrentContent);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
     //QObject::connect(player, &QMediaObject::metaDataAvailableChanged, this, &MediaPlayer::metaDataAvailableCallback);
 
     QObject::connect(player, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableCallback(bool)));
+
+    QObject::connect(playlist, &QMediaPlaylist::currentIndexChanged, this, &MediaPlayer::checkPlaylist);
 
     QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::randomItemComplete);
 
@@ -82,18 +83,6 @@ void MediaPlayer :: setPlaybackStatus(QMediaPlayer::State state)
     emit playbackStatusChanged();
 }
 
-const QMediaContent &MediaPlayer :: currentContent ( ) {
-    return qCurrentContent;
-}
-
-void MediaPlayer :: setCurrentContent(QMediaContent content)
-{
-    qCurrentContent = content;
-    emit currentContentChanged();
-    checkPlaylist();
-    qDebug("currentContentChanged");
-}
-
 const QString &MediaPlayer :: title ( ) {
     return mediaTitle;
 }
@@ -138,10 +127,10 @@ void MediaPlayer :: setPosition(qint64 position)
     metaDataAvailableCallback(player->isMetaDataAvailable());
 }
 
-void MediaPlayer :: checkPlaylist()
+void MediaPlayer :: checkPlaylist(int currentIndex)
 {
     //check if current item is the last in list
-    if(playlist->currentIndex() == (playlist->mediaCount() -1))
+    if(currentIndex == (playlist->mediaCount() -1))
     {
         //insert random item next
         tracker->randomItem();
@@ -168,7 +157,6 @@ void MediaPlayer :: randomItemComplete(QString url)
 
 void MediaPlayer :: metaDataAvailableCallback(bool available)
 {
-    qDebug() << "metaDataAvailable: " << available;
     if(available)
     {
         setTitle(player->metaData(QMediaMetaData::Title).toString());

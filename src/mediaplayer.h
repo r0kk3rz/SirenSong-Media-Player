@@ -10,14 +10,12 @@ class MediaPlayer : public QObject
     Q_PROPERTY ( int playbackStatus READ playbackStatus NOTIFY playbackStatusChanged )
     Q_PROPERTY ( qint64 position READ position NOTIFY positionChanged )
     Q_PROPERTY ( qint64 duration READ duration NOTIFY durationChanged )
-    Q_PROPERTY(QMediaContent currentContent READ currentContent NOTIFY currentContentChanged)
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QString artist READ artist NOTIFY artistChanged)
 
 public:
     MediaPlayer(QObject * parent = 0 );
     const int &playbackStatus( );
-    const QMediaContent &currentContent( );
     const qint64 &position( );
     const qint64 &duration( );
     const QString &title( );
@@ -35,7 +33,6 @@ public slots:
 
 signals:
     void playbackStatusChanged( );
-    void currentContentChanged( );
     void positionChanged( );
     void durationChanged( );
     void titleChanged( );
@@ -45,7 +42,6 @@ private:
     QMediaPlaylist * playlist;
     QMediaPlayer * player;
     int iPlaybackStatus;
-    QMediaContent qCurrentContent;
     qint64 iPosition;
     qint64 iDuration;
     QString sCurrentResultsQuery;
@@ -56,15 +52,15 @@ private:
 
 private slots:
     void setPlaybackStatus( QMediaPlayer::State state );
-    void setCurrentContent(QMediaContent content);
     void setPosition(qint64 position);
     void setDuration(qint64 duration);
     void setTitle(QString title);
     void setArtist(QString artist);
-    void checkPlaylist();
+    void checkPlaylist(int currentIndex);
     void randomItemComplete(QString url);
     void metaDataCallback(QString &key, QVariant &value);
     void metaDataAvailableCallback(bool available);
+
 };
 
 #endif // MEDIAPLAYER_H
