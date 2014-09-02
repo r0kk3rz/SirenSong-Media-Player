@@ -4,6 +4,7 @@
 
 #include <sailfishapp.h>
 #include "mediaplayer.h"
+#include "playlistmodel.h"
 
 static QObject *player(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -21,6 +22,8 @@ int main(int argc, char *argv[])
     //qmlRegisterType <MediaPlayer> ( "com.wayfarer.sirensong", 1, 0, "MediaPlayer" );
 
     qmlRegisterSingletonType<MediaPlayer>("com.wayfarer.sirensong", 1, 0, "SirenSong", player);
+
+    qmlRegisterType<PlaylistModel>("com.wayfarer.sirensong", 1, 0, "PlaylistModel");
 
     // SailfishApp::main() will display "qml/template.qml", if you need more
     // control over initialization, you can use:

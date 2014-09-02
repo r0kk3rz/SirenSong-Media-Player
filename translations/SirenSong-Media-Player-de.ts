@@ -24,6 +24,20 @@
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <source>Song Library</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlayerPage</name>
+    <message>
+        <source>Play Queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SecondPage</name>
     <message>
         <source>Nested Page</source>

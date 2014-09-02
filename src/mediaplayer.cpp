@@ -2,13 +2,13 @@
 #include <QtMultimedia>
 #include "trackerinterface.h"
 #include <QMediaMetaData>
+#include "playlistmodel.h"
 
 MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
 {
     playlist = new QMediaPlaylist;
     player = new QMediaPlayer;
     tracker = new trackerinterface;
-
     player->setPlaylist(playlist);
     iPlaybackStatus = 0;
     iPosition = 0;
@@ -42,6 +42,14 @@ void MediaPlayer :: play(QString url)
     playlist->setCurrentIndex((playlist->mediaCount() - 1));
 
     player->play();
+}
+
+void MediaPlayer :: playIndex(int index)
+{
+    if(index <= (playlist->mediaCount() -1))
+    {
+        playlist->setCurrentIndex(index);
+    }
 }
 
 void MediaPlayer :: next()
@@ -107,7 +115,6 @@ void MediaPlayer :: setArtist(QString artist)
 const qint64 &MediaPlayer :: duration ( ) {
     return iDuration;
 }
-
 void MediaPlayer :: setDuration(qint64 duration)
 {
     iDuration = duration;
@@ -116,6 +123,13 @@ void MediaPlayer :: setDuration(qint64 duration)
 
 const qint64 &MediaPlayer :: position( ) {
     return iPosition;
+}
+
+PlaylistModel* MediaPlayer :: getPlaylistModel()
+{
+    PlaylistModel * plModel = new PlaylistModel();
+    plModel->setPlaylist(playlist);
+    return plModel;
 }
 
 void MediaPlayer :: setPosition(qint64 position)
@@ -129,6 +143,7 @@ void MediaPlayer :: setPosition(qint64 position)
 
 void MediaPlayer :: checkPlaylist(int currentIndex)
 {
+    qDebug() << "PlaylistIndex: " << currentIndex;
     //check if current item is the last in list
     if(currentIndex == (playlist->mediaCount() -1))
     {

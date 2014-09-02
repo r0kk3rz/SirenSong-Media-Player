@@ -3,6 +3,7 @@
 
 #include <QtMultimedia>
 #include "trackerinterface.h"
+#include "playlistmodel.h"
 
 class MediaPlayer : public QObject
 {
@@ -21,15 +22,18 @@ public:
     const QString &title( );
     const QString &artist( );
 
+
 public slots:
     void play( );
     void play(QString url);
+    void playIndex(int index);
     void next( );
     void previous( );
     void pause( );
     void stop( );
     void addToPlaylist(QString url);
     //void setCurrentResultsQuery(QString query);
+    Q_INVOKABLE PlaylistModel* getPlaylistModel();
 
 signals:
     void playbackStatusChanged( );
@@ -39,8 +43,8 @@ signals:
     void artistChanged( );
 
 private:
-    QMediaPlaylist * playlist;
     QMediaPlayer * player;
+    QMediaPlaylist * playlist;
     int iPlaybackStatus;
     qint64 iPosition;
     qint64 iDuration;
