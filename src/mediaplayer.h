@@ -62,9 +62,7 @@ private slots:
     void setArtist(QString artist);
     void checkPlaylist(int currentIndex);
     void randomItemComplete(QString url);
-    void metaDataCallback(QString &key, QVariant &value);
-    void metaDataAvailableCallback(bool available);
-
+    void metaDataCallback(const QString &key, const QVariant &value);
 };
 
 #endif // MEDIAPLAYER_H

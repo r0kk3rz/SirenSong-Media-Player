@@ -24,8 +24,20 @@ Page {
             delegate: ListItem {
                 id: playlistItem
                 width: parent.width
-                height: Theme.itemSizeMedium
                 focus: index == playlistView.model.currentIndex ? true : false
+
+                function durationString(length) {
+                    var iMinutes = Math.floor(length / 60)
+                    var iSeconds = (length % 60)
+
+                    if (iMinutes.toString().length == 1)
+                        iMinutes = ("0" + iMinutes)
+
+                    if (iSeconds.toString().length == 1)
+                        iSeconds = ("0" + iSeconds)
+
+                    return iMinutes + ":" + iSeconds
+                }
 
                 onClicked: SirenSong.playIndex(index)
 
@@ -34,7 +46,7 @@ Page {
                     x: 10
 
                     Label {
-                        text: "00:00"
+                        text: durationString(duration)
                         height: Theme.itemSizeHuge
                         font.pixelSize: Theme.fontSizeExtraLarge
                         color: playlistItem.focus ? Theme.highlightColor : Theme.secondaryColor
@@ -42,12 +54,12 @@ Page {
 
                     Column {
                         Label {
-                            text: "Title"
+                            text: title
                             font.pixelSize: Theme.fontSizeMedium
                             color: playlistItem.focus ? Theme.highlightColor : Theme.primaryColor
                         }
                         Label {
-                            text: "Artist"
+                            text: artist
                             font.pixelSize: Theme.fontSizeExtraSmall
                             color: playlistItem.focus ? Theme.highlightColor : Theme.secondaryColor
                         }
@@ -100,24 +112,24 @@ Page {
                         id: previous
                         icon.source: "image://theme/icon-m-previous"
                         onClicked: SirenSong.previous()
-                        width: parent.width / 4
+                        width: parent.width / 3
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
-                    IconButton {
-                        id: stop
-                        icon.source: "image://theme/icon-l-clear"
-                        onClicked: SirenSong.stop()
-                        width: parent.width / 4
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
+                    //IconButton {
+                    //    id: stop
+                    //    icon.source: "image://theme/icon-l-clear"
+                    //    onClicked: SirenSong.stop()
+                    //    width: parent.width / 4
+                    //    anchors.verticalCenter: parent.verticalCenter
+                    //}
 
                     IconButton {
                         id: play
                         icon.source: SirenSong.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
                         onClicked: SirenSong.playbackStatus === 1 ? SirenSong.pause(
                                                                         ) : SirenSong.play()
-                        width: parent.width / 4
+                        width: parent.width / 3
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
@@ -125,7 +137,7 @@ Page {
                         id: next
                         icon.source: "image://theme/icon-m-next"
                         onClicked: SirenSong.next()
-                        width: parent.width / 4
+                        width: parent.width / 3
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }

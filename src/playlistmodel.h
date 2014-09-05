@@ -44,7 +44,7 @@
 #include <QAbstractItemModel>
 #include <QMediaPlaylist>
 
-class PlaylistModel : public QAbstractItemModel
+class PlaylistModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QMediaPlaylist* playlist READ playlist WRITE setPlaylist)
@@ -53,11 +53,16 @@ class PlaylistModel : public QAbstractItemModel
 public:
     enum Column
     {
-        Title = 0,
+        Title = Qt::UserRole + 1,
+        Artist,
+        Album,
+        Duration,
         ColumnCount
     };
 
     PlaylistModel(QObject *parent = 0);
+
+    QHash<int, QByteArray> roleNames() const;
 
     Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const;
     Q_INVOKABLE int columnCount(const QModelIndex &parent = QModelIndex()) const;

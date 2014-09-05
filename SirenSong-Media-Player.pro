@@ -13,7 +13,8 @@
 TARGET = SirenSong-Media-Player
 
 CONFIG += sailfishapp \
-            qtsparql
+            qtsparql \
+            id3tag
 
 QT += multimedia
 

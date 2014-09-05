@@ -129,6 +129,9 @@ Grid {
             }
             _currActiveGroup = group
 
+            console.log("rows:" + rows)
+            console.log("columns: " + columns)
+
             var listHeight = _groupListHeight(group.groupIndex)
             activated((Math.floor(
                            group.groupIndex / columns) + 1) * group.baseHeight,

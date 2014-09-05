@@ -20,9 +20,9 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
-    //QObject::connect(player, &QMediaObject::metaDataAvailableChanged, this, &MediaPlayer::metaDataAvailableCallback);
 
-    QObject::connect(player, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableCallback(bool)));
+    //Old connection syntax due to overloaded metaDataChanged()
+    QObject::connect(player, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataCallback(QString,QVariant)));
 
     QObject::connect(playlist, &QMediaPlaylist::currentIndexChanged, this, &MediaPlayer::checkPlaylist);
 
@@ -49,6 +49,7 @@ void MediaPlayer :: playIndex(int index)
     if(index <= (playlist->mediaCount() -1))
     {
         playlist->setCurrentIndex(index);
+        player->play();
     }
 }
 
@@ -136,9 +137,6 @@ void MediaPlayer :: setPosition(qint64 position)
 {
     iPosition = position;
     emit positionChanged();
-
-    //hack hack hack, needs doing properly
-    metaDataAvailableCallback(player->isMetaDataAvailable());
 }
 
 void MediaPlayer :: checkPlaylist(int currentIndex)
@@ -170,20 +168,8 @@ void MediaPlayer :: randomItemComplete(QString url)
     this->addToPlaylist(url);
 }
 
-void MediaPlayer :: metaDataAvailableCallback(bool available)
+void MediaPlayer :: metaDataCallback(const QString &key, const QVariant &value)
 {
-    if(available)
-    {
-        setTitle(player->metaData(QMediaMetaData::Title).toString());
-        setArtist(player->metaData(QMediaMetaData::AlbumArtist).toString());
-    }
-}
-
-void MediaPlayer :: metaDataCallback(QString &key, QVariant &value)
-{
-    qDebug() << "metadatakey: " << key;
-    qDebug() << "metadatavalue: " << value.toString();
-
     if(key == QMediaMetaData::Title)
         setTitle(value.toString());
         

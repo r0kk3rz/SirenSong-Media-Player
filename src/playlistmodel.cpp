@@ -43,13 +43,24 @@
 #include <QFileInfo>
 #include <QUrl>
 #include <QMediaPlaylist>
+#include <QtSparql>
 
 PlaylistModel::PlaylistModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractListModel(parent)
     , m_playlist(0)
 {
     iCurrentIndex = 0;
 }
+
+    QHash<int, QByteArray> PlaylistModel::roleNames() const
+    {
+            QHash<int, QByteArray> roles;
+            roles[Title] = "title";
+            roles[Artist] = "artist";
+            roles[Album] = "album";
+            roles[Duration] = "duration";
+            return roles;
+    }
 
 int PlaylistModel::rowCount(const QModelIndex &parent) const
 {
@@ -84,12 +95,42 @@ QModelIndex PlaylistModel::parent(const QModelIndex &child) const
 
 QVariant PlaylistModel::data(const QModelIndex &index, int role) const
 {
-    if (index.isValid() && role == Qt::DisplayRole) {
+    if (index.isValid()) {
         QVariant value = m_data[index];
-        qDebug() << "dataValue: " << value;
-        if (!value.isValid() && index.column() == Title) {
+        if (!value.isValid()) {
             QUrl location = m_playlist->media(index.row()).canonicalUrl();
-            return QFileInfo(location.path()).fileName();
+
+            QSparqlConnection * conn = new QSparqlConnection("QTRACKER_DIRECT");
+
+            QSparqlQuery metaDataQuery(QString("SELECT ?url ?title ?length ?artist ?album " \
+                                    "WHERE { ?song a nmm:MusicPiece . " \
+                                    "?song nie:title ?title . " \
+                                    "?song nfo:duration ?length . " \
+                                        "?song nie:url ?url . " \
+                                        "?song nmm:performer ?aName . " \
+                                        "?aName nmm:artistName ?artist . " \
+                                        "?song nmm:musicAlbum ?malbum . " \
+                                        "?malbum nmm:albumTitle ?album " \
+                                        "FILTER (?url = \"%1\") " \
+                                               "} LIMIT 1").arg(location.toString(QUrl::FullyEncoded)));
+
+            QSparqlResult * result = conn->exec(metaDataQuery);
+
+            result->waitForFinished();
+
+            result->first();
+
+            if(role == Title)
+                return result->value(1).toString();
+
+            if(role == Artist)
+                return result->value(3).toString();
+
+            if(role == Album)
+                return result->value(4).toString();
+
+            if(role == Duration)
+                return result->value(2).toString();
         }
 
         return value;
