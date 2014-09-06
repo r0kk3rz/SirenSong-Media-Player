@@ -16,12 +16,14 @@ CONFIG += sailfishapp \
             qtsparql \
             id3tag
 
-QT += multimedia
+QT += multimedia \
+        dbus
 
 SOURCES += src/SirenSong-Media-Player.cpp \
     src/mediaplayer.cpp \
     src/trackerinterface.cpp \
-    src/playlistmodel.cpp
+    src/playlistmodel.cpp \
+    src/mediaplayerdbusadaptor.cpp
 
 OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/cover/CoverPage.qml \
@@ -44,5 +46,6 @@ TRANSLATIONS += translations/SirenSong-Media-Player-de.ts
 HEADERS += \
     src/mediaplayer.h \
     src/trackerinterface.h \
-    src/playlistmodel.h
+    src/playlistmodel.h \
+    src/mediaplayerdbusadaptor.h
 

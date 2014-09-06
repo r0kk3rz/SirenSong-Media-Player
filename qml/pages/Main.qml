@@ -5,6 +5,7 @@ import com.wayfarer.sirensong 1.0
 import Sailfish.Media 1.0
 import org.nemomobile.policy 1.0
 
+
 Page {
     id: libraryPage
     property bool playerMenuEnabled: false

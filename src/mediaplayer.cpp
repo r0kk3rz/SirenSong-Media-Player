@@ -27,7 +27,6 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     QObject::connect(playlist, &QMediaPlaylist::currentIndexChanged, this, &MediaPlayer::checkPlaylist);
 
     QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::randomItemComplete);
-
 }
 
 void MediaPlayer :: play()

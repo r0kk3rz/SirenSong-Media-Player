@@ -4,7 +4,10 @@
 
 #include <sailfishapp.h>
 #include "mediaplayer.h"
+#include "mediaplayerdbusadaptor.h"
 #include "playlistmodel.h"
+#include <QtDBus>
+
 
 static QObject *player(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -13,13 +16,17 @@ static QObject *player(QQmlEngine *engine, QJSEngine *scriptEngine)
     static MediaPlayer *player = NULL;
     if (!player) {
         player = new MediaPlayer();
+        new mediaplayerDbusAdaptor(player);
+        QDBusConnection::sessionBus().registerObject(QString("/org/mpris/MediaPlayer2"), player, QDBusConnection::ExportAdaptors);
     }
     return player;
 }
 
 int main(int argc, char *argv[])
 {
-    //qmlRegisterType <MediaPlayer> ( "com.wayfarer.sirensong", 1, 0, "MediaPlayer" );
+
+    QDBusConnection::sessionBus().registerService("org.mpris.MediaPlayer2.sirensong");
+
 
     qmlRegisterSingletonType<MediaPlayer>("com.wayfarer.sirensong", 1, 0, "SirenSong", player);
 
