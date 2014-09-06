@@ -13,6 +13,7 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     iPlaybackStatus = 0;
     iPosition = 0;
     iDuration = 0;
+    iCurrentIndex = 0;
     sCurrentResultsQuery = "";
     mediaArtist = "Artist";
     mediaTitle = "Title";
@@ -85,6 +86,10 @@ const int &MediaPlayer :: playbackStatus ( ) {
     return iPlaybackStatus;
 }
 
+const int &MediaPlayer::currentIndex() {
+    return iCurrentIndex;
+}
+
 void MediaPlayer :: setPlaybackStatus(QMediaPlayer::State state)
 {
     iPlaybackStatus = state;
@@ -140,6 +145,9 @@ void MediaPlayer :: setPosition(qint64 position)
 
 void MediaPlayer :: checkPlaylist(int currentIndex)
 {
+    iCurrentIndex = currentIndex;
+    emit currentIndexChanged();
+
     qDebug() << "PlaylistIndex: " << currentIndex;
     //check if current item is the last in list
     if(currentIndex == (playlist->mediaCount() -1))

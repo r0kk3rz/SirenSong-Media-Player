@@ -13,6 +13,7 @@ class MediaPlayer : public QObject
     Q_PROPERTY ( qint64 duration READ duration NOTIFY durationChanged )
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QString artist READ artist NOTIFY artistChanged)
+    Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
 
 public:
     MediaPlayer(QObject * parent = 0 );
@@ -21,6 +22,7 @@ public:
     const qint64 &duration( );
     const QString &title( );
     const QString &artist( );
+    const int &currentIndex( );
 
 
 public slots:
@@ -41,6 +43,7 @@ signals:
     void durationChanged( );
     void titleChanged( );
     void artistChanged( );
+    void currentIndexChanged();
 
 private:
     QMediaPlayer * player;
@@ -53,6 +56,7 @@ private:
     trackerinterface * tracker;
     QString mediaTitle;
     QString mediaArtist;
+    int iCurrentIndex;
 
 private slots:
     void setPlaybackStatus( QMediaPlayer::State state );
