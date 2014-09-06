@@ -2,6 +2,10 @@
 
 mediaplayerDbusAdaptor::mediaplayerDbusAdaptor(MediaPlayer * mediaplayer) : QDBusAbstractAdaptor(mediaplayer), mp(mediaplayer)
 {
+    playingStatus = "Playing";
+    pausedStatus = "Paused";
+    stoppedStatus = "Stopped";
+    normalPlaybackRate = 1.0;
 
 }
 
@@ -47,3 +51,30 @@ void mediaplayerDbusAdaptor::PlayPause()
     }
 }
 
+const QString &mediaplayerDbusAdaptor::PlaybackStatus()
+{
+    switch(mp->playbackStatus())
+    {
+        case 0:
+            return stoppedStatus;
+        case 1:
+            return playingStatus;
+        case 2:
+            return pausedStatus;
+    }
+}
+
+const double &mediaplayerDbusAdaptor::Rate()
+{
+    return normalPlaybackRate;
+}
+
+const double &mediaplayerDbusAdaptor::MinimumRate()
+{
+    return normalPlaybackRate;
+}
+
+const double &mediaplayerDbusAdaptor::MaximumRate()
+{
+    return normalPlaybackRate;
+}
