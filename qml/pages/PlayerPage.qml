@@ -4,6 +4,10 @@ import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 
 Page {
+
+    onStateChanged: console.log("playqueue Page State: " + state)
+    onStatusChanged: console.log("playqueue Page Status: " + status)
+
     Drawer {
 
         open: true
@@ -19,7 +23,7 @@ Page {
 
             VerticalScrollDecorator {}
 
-            model: SirenSong.getPlaylistModel()
+            model: SirenSong.playlistModel
 
             delegate: ListItem {
                 id: playlistItem

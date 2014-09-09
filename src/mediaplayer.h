@@ -14,6 +14,7 @@ class MediaPlayer : public QObject
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QString artist READ artist NOTIFY artistChanged)
     Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
+    Q_PROPERTY(PlaylistModel * playlistModel READ playlistModel)
 
 public:
     MediaPlayer(QObject * parent = 0 );
@@ -23,6 +24,7 @@ public:
     const QString &title( );
     const QString &artist( );
     const int &currentIndex( );
+    PlaylistModel* &playlistModel();
 
 
 public slots:
@@ -35,7 +37,7 @@ public slots:
     void stop( );
     void addToPlaylist(QString url);
     //void setCurrentResultsQuery(QString query);
-    Q_INVOKABLE PlaylistModel* getPlaylistModel();
+
 
 signals:
     void playbackStatusChanged( );
@@ -57,6 +59,7 @@ private:
     QString mediaTitle;
     QString mediaArtist;
     int iCurrentIndex;
+    PlaylistModel * plModel;
 
 private slots:
     void setPlaybackStatus( QMediaPlayer::State state );

@@ -10,6 +10,8 @@ mediaplayerDbusAdaptor::mediaplayerDbusAdaptor(MediaPlayer * mediaplayer) : QDBu
     canFalse = false;
     dVolume = 1.0;
     asMetadata = QVariantMap();
+
+
 }
 
 void mediaplayerDbusAdaptor::Play()
@@ -135,3 +137,17 @@ const bool &mediaplayerDbusAdaptor::CanControl()
 {
     return canTrue;
 }
+
+/*
+void mediaplayerDbusAdaptor::notifyPropertyChanged( const QString& interface, const QString& propertyName )
+{
+    QDBusMessage signal = QDBusMessage::createSignal(mprisObjectPath,freedesktopPath,"PropertiesChanged" );
+    signal << interface;
+    QVariantMap changedProps;
+    changedProps.insert(propertyName, property(propertyName.toLatin1()));
+    signal << changedProps;
+    signal << QStringList();
+    qDebug() << propertyName;
+    qDebug() << changedProps;
+    QDBusConnection::sessionBus().send(signal);
+} */

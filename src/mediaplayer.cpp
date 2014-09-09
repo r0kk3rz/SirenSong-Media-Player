@@ -17,6 +17,8 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     sCurrentResultsQuery = "";
     mediaArtist = "Artist";
     mediaTitle = "Title";
+    plModel = new PlaylistModel();
+    plModel->setPlaylist(playlist);
 
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
@@ -130,10 +132,8 @@ const qint64 &MediaPlayer :: position( ) {
     return iPosition;
 }
 
-PlaylistModel* MediaPlayer :: getPlaylistModel()
+PlaylistModel* &MediaPlayer :: playlistModel()
 {
-    PlaylistModel * plModel = new PlaylistModel();
-    plModel->setPlaylist(playlist);
     return plModel;
 }
 

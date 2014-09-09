@@ -208,6 +208,7 @@ void PlaylistModel::changeItems(int start, int end)
 
 void PlaylistModel::setCurrentIndex(int index)
 {
+    qDebug() << "playlistModel currentIndex: " << index;
     iCurrentIndex = index;
     emit currentIndexChanged();
 }
