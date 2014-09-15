@@ -6,6 +6,7 @@
 #include "mediaplayer.h"
 #include "mediaplayerdbusadaptor.h"
 #include "playlistmodel.h"
+#include "mprisinterface.h"
 #include <QtDBus>
 
 
@@ -17,6 +18,7 @@ static QObject *player(QQmlEngine *engine, QJSEngine *scriptEngine)
     if (!player) {
         player = new MediaPlayer();
         new mediaplayerDbusAdaptor(player);
+        new mprisinterface(player);
         QDBusConnection::sessionBus().registerObject(QString("/org/mpris/MediaPlayer2"), player, QDBusConnection::ExportAdaptors);
     }
     return player;
@@ -24,9 +26,7 @@ static QObject *player(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 int main(int argc, char *argv[])
 {
-
     QDBusConnection::sessionBus().registerService("org.mpris.MediaPlayer2.sirensong");
-
 
     qmlRegisterSingletonType<MediaPlayer>("com.wayfarer.sirensong", 1, 0, "SirenSong", player);
 

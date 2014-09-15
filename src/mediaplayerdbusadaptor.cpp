@@ -11,6 +11,8 @@ mediaplayerDbusAdaptor::mediaplayerDbusAdaptor(MediaPlayer * mediaplayer) : QDBu
     dVolume = 1.0;
     asMetadata = QVariantMap();
 
+    QObject::connect(mp, &MediaPlayer::playbackStatusChanged, this, &mediaplayerDbusAdaptor::playbackStatusChanged);
+    QObject::connect(mp, &MediaPlayer::artistChanged, this, &mediaplayerDbusAdaptor::metaDataChanged);
 
 }
 
@@ -54,6 +56,17 @@ void mediaplayerDbusAdaptor::PlayPause()
     {
         mp->play();
     }
+}
+
+void mediaplayerDbusAdaptor::Seek(qint64 offset)
+{
+    Q_UNUSED(offset);
+}
+
+void mediaplayerDbusAdaptor::SetPosition(QString trackId, qint64 position)
+{
+    Q_UNUSED(trackId);
+    Q_UNUSED(position);
 }
 
 const QString &mediaplayerDbusAdaptor::PlaybackStatus()
@@ -138,16 +151,24 @@ const bool &mediaplayerDbusAdaptor::CanControl()
     return canTrue;
 }
 
-/*
-void mediaplayerDbusAdaptor::notifyPropertyChanged( const QString& interface, const QString& propertyName )
+void mediaplayerDbusAdaptor::playbackStatusChanged()
 {
-    QDBusMessage signal = QDBusMessage::createSignal(mprisObjectPath,freedesktopPath,"PropertiesChanged" );
-    signal << interface;
+    QDBusMessage signal = QDBusMessage::createSignal("/org/mpris/MediaPlayer2","org.freedesktop.DBus.Properties","PropertiesChanged" );
+    signal << "org.mpris.MediaPlayer2.Player";
     QVariantMap changedProps;
-    changedProps.insert(propertyName, property(propertyName.toLatin1()));
+    changedProps.insert("PlaybackStatus", PlaybackStatus());
     signal << changedProps;
     signal << QStringList();
-    qDebug() << propertyName;
-    qDebug() << changedProps;
     QDBusConnection::sessionBus().send(signal);
-} */
+}
+
+void mediaplayerDbusAdaptor::metaDataChanged()
+{
+   QDBusMessage signal = QDBusMessage::createSignal("/org/mpris/MediaPlayer2","org.freedesktop.DBus.Properties","PropertiesChanged" );
+   signal << "org.mpris.MediaPlayer2.Player";
+   QVariantMap changedProps;
+   changedProps.insert("Metadata", Metadata());
+   signal << changedProps;
+   signal << QStringList();
+   QDBusConnection::sessionBus().send(signal);
+}

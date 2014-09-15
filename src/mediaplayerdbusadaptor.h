@@ -48,6 +48,8 @@ public slots:
     void Previous();
     void Next();
     void OpenUri(QString uri);
+    void Seek(qint64 offset);
+    void SetPosition(QString trackId, qint64 position);
 
 
 
@@ -61,6 +63,10 @@ private:
     double dVolume;
     bool canTrue;
     bool canFalse;
+
+private slots:
+    void playbackStatusChanged();
+    void metaDataChanged();
 };
 
 #endif // MEDIAPLAYERDBUSADAPTOR_H

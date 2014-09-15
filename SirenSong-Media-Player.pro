@@ -23,7 +23,8 @@ SOURCES += src/SirenSong-Media-Player.cpp \
     src/mediaplayer.cpp \
     src/trackerinterface.cpp \
     src/playlistmodel.cpp \
-    src/mediaplayerdbusadaptor.cpp
+    src/mediaplayerdbusadaptor.cpp \
+    src/mprisinterface.cpp
 
 OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/cover/CoverPage.qml \
@@ -47,5 +48,6 @@ HEADERS += \
     src/mediaplayer.h \
     src/trackerinterface.h \
     src/playlistmodel.h \
-    src/mediaplayerdbusadaptor.h
+    src/mediaplayerdbusadaptor.h \
+    src/mprisinterface.h
 

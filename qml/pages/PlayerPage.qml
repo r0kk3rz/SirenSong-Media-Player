@@ -4,10 +4,6 @@ import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 
 Page {
-
-    onStateChanged: console.log("playqueue Page State: " + state)
-    onStatusChanged: console.log("playqueue Page Status: " + status)
-
     Drawer {
 
         open: true
@@ -22,6 +18,18 @@ Page {
             currentIndex: playlistView.model.currentIndex
 
             VerticalScrollDecorator {}
+
+            PullDownMenu {
+                MenuItem {
+                    text: "Toggle Loop"
+                    onClicked: SirenSong.toggleLoop()
+                }
+
+                MenuItem {
+                    text: "Clear Play Queue"
+                    onClicked: SirenSong.clearPlaylist()
+                }
+            }
 
             model: SirenSong.playlistModel
 

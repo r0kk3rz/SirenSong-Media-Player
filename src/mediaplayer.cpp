@@ -19,6 +19,8 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     mediaTitle = "Title";
     plModel = new PlaylistModel();
     plModel->setPlaylist(playlist);
+    shuffle = false;
+    loop = false;
 
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
@@ -29,7 +31,7 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
 
     QObject::connect(playlist, &QMediaPlaylist::currentIndexChanged, this, &MediaPlayer::checkPlaylist);
 
-    QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::randomItemComplete);
+    QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::addToPlaylist);
 }
 
 void MediaPlayer :: play()
@@ -43,7 +45,7 @@ void MediaPlayer :: play(QString url)
 
     playlist->setCurrentIndex((playlist->mediaCount() - 1));
 
-    player->play();
+    play();
 }
 
 void MediaPlayer :: playIndex(int index)
@@ -51,13 +53,13 @@ void MediaPlayer :: playIndex(int index)
     if(index <= (playlist->mediaCount() -1))
     {
         playlist->setCurrentIndex(index);
-        player->play();
+        play();
     }
 }
 
 void MediaPlayer :: next()
 {
-    if(playlist->currentIndex() < (playlist->mediaCount() -1))
+    if((playlist->currentIndex() < (playlist->mediaCount() -1)) || loop)
     {
         playlist->next();
     }
@@ -65,7 +67,7 @@ void MediaPlayer :: next()
 
 void MediaPlayer :: previous()
 {
-    if(playlist->currentIndex() != 0)
+    if((playlist->currentIndex() != 0) || loop)
         playlist->previous();
 }
 
@@ -82,6 +84,29 @@ void MediaPlayer :: stop()
 void MediaPlayer :: addToPlaylist(QString url)
 {
     playlist->addMedia(QUrl(url));
+}
+
+void MediaPlayer::clearPlaylist()
+{
+    qDebug() << "Clear Playlist";
+    stop();
+    playlist->clear();
+}
+
+void MediaPlayer::toggleLoop()
+{
+    qDebug() << "Toggle Loop: " << loop;
+    if(loop == true)
+    {
+        loop = false;
+        playlist->setPlaybackMode(QMediaPlaylist::Sequential);
+        checkPlaylist(playlist->currentIndex());
+    }
+    else
+    {
+        loop = true;
+        playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    }
 }
 
 const int &MediaPlayer :: playbackStatus ( ) {
@@ -149,11 +174,14 @@ void MediaPlayer :: checkPlaylist(int currentIndex)
     emit currentIndexChanged();
 
     qDebug() << "PlaylistIndex: " << currentIndex;
-    //check if current item is the last in list
-    if(currentIndex == (playlist->mediaCount() -1))
+    if(!shuffle && !loop)
     {
-        //insert random item next
-        tracker->randomItem();
+        //check if current item is the last in list
+        if(currentIndex == (playlist->mediaCount() -1))
+        {
+            //insert random item next
+            tracker->randomItem();
+        }
     }
 
     qDebug() << "mediaCount: " << playlist->mediaCount();
@@ -167,12 +195,6 @@ void MediaPlayer :: checkPlaylist(int currentIndex)
           //  playlist->removeMedia(0);
         //}
     //}
-}
-
-//async callback handler for tracker
-void MediaPlayer :: randomItemComplete(QString url)
-{
-    this->addToPlaylist(url);
 }
 
 void MediaPlayer :: metaDataCallback(const QString &key, const QVariant &value)

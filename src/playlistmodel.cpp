@@ -174,6 +174,7 @@ bool PlaylistModel::setData(const QModelIndex &index, const QVariant &value, int
 {
     Q_UNUSED(role);
     m_data[index] = value;
+    qDebug() << "PlaylistModel Data: " << value;
     emit dataChanged(index, index);
     return true;
 }
@@ -202,6 +203,7 @@ void PlaylistModel::endRemoveItems()
 
 void PlaylistModel::changeItems(int start, int end)
 {
+    qDebug() << "playlistModel changed: " << start << " " << end;
     m_data.clear();
     emit dataChanged(index(start,0), index(end,ColumnCount));
 }

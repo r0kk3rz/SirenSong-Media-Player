@@ -36,6 +36,8 @@ public slots:
     void pause( );
     void stop( );
     void addToPlaylist(QString url);
+    void clearPlaylist();
+    void toggleLoop();
     //void setCurrentResultsQuery(QString query);
 
 
@@ -60,6 +62,8 @@ private:
     QString mediaArtist;
     int iCurrentIndex;
     PlaylistModel * plModel;
+    bool shuffle;
+    bool loop;
 
 private slots:
     void setPlaybackStatus( QMediaPlayer::State state );
@@ -68,7 +72,6 @@ private slots:
     void setTitle(QString title);
     void setArtist(QString artist);
     void checkPlaylist(int currentIndex);
-    void randomItemComplete(QString url);
     void metaDataCallback(const QString &key, const QVariant &value);
 };
 
