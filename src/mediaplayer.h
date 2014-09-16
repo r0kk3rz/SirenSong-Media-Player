@@ -15,6 +15,7 @@ class MediaPlayer : public QObject
     Q_PROPERTY(QString artist READ artist NOTIFY artistChanged)
     Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
     Q_PROPERTY(PlaylistModel * playlistModel READ playlistModel)
+    Q_PROPERTY(bool loopStatus READ loopStatus NOTIFY loopStatusChanged)
 
 public:
     MediaPlayer(QObject * parent = 0 );
@@ -24,6 +25,7 @@ public:
     const QString &title( );
     const QString &artist( );
     const int &currentIndex( );
+    const bool &loopStatus();
     PlaylistModel* &playlistModel();
 
 
@@ -48,6 +50,7 @@ signals:
     void titleChanged( );
     void artistChanged( );
     void currentIndexChanged();
+    void loopStatusChanged();
 
 private:
     QMediaPlayer * player;

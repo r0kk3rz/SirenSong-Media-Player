@@ -5,7 +5,12 @@ mediaplayerDbusAdaptor::mediaplayerDbusAdaptor(MediaPlayer * mediaplayer) : QDBu
     playingStatus = "Playing";
     pausedStatus = "Paused";
     stoppedStatus = "Stopped";
+
+    loopNoneStatus = "None";
+    loopPlaylistStatus = "Playlist";
+
     normalPlaybackRate = 1.0;
+
     canTrue = true;
     canFalse = false;
     dVolume = 1.0;
@@ -81,6 +86,18 @@ const QString &mediaplayerDbusAdaptor::PlaybackStatus()
             return pausedStatus;
         default:
             return stoppedStatus;
+    }
+}
+
+const QString &mediaplayerDbusAdaptor::LoopStatus()
+{
+    if(mp->loopStatus() == true)
+    {
+        return loopPlaylistStatus;
+    }
+    else
+    {
+        return loopNoneStatus;
     }
 }
 

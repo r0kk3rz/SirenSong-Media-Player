@@ -100,13 +100,20 @@ void MediaPlayer::toggleLoop()
     {
         loop = false;
         playlist->setPlaybackMode(QMediaPlaylist::Sequential);
+        emit loopStatusChanged();
         checkPlaylist(playlist->currentIndex());
     }
     else
     {
         loop = true;
         playlist->setPlaybackMode(QMediaPlaylist::Loop);
+        emit loopStatusChanged();
     }
+}
+
+const bool &MediaPlayer :: loopStatus()
+{
+    return loop;
 }
 
 const int &MediaPlayer :: playbackStatus ( ) {

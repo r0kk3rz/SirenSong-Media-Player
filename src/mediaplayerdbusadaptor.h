@@ -10,6 +10,7 @@ class mediaplayerDbusAdaptor : public QDBusAbstractAdaptor
     Q_CLASSINFO ("D-Bus Interface", "org.mpris.MediaPlayer2.Player")
 
     Q_PROPERTY(QString PlaybackStatus READ PlaybackStatus)
+    Q_PROPERTY(QString LoopStatus READ LoopStatus)
     Q_PROPERTY(double Rate READ Rate)
     Q_PROPERTY(qint64 Position READ Position)
     Q_PROPERTY(double MinimumRate READ MinimumRate)
@@ -27,6 +28,7 @@ class mediaplayerDbusAdaptor : public QDBusAbstractAdaptor
 public:
     mediaplayerDbusAdaptor(MediaPlayer * mediaplayer);
     const QString &PlaybackStatus();
+    const QString &LoopStatus();
     const double &Rate();
     const qint64 &Position();
     const double &MinimumRate();
@@ -58,6 +60,8 @@ private:
     QString stoppedStatus;
     QString playingStatus;
     QString pausedStatus;
+    QString loopNoneStatus;
+    QString loopPlaylistStatus;
     QVariantMap asMetadata;
     double normalPlaybackRate;
     double dVolume;

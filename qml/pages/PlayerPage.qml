@@ -20,10 +20,11 @@ Page {
             VerticalScrollDecorator {}
 
             PullDownMenu {
-                MenuItem {
-                    text: "Toggle Loop"
-                    onClicked: SirenSong.toggleLoop()
-                }
+
+               MenuItem {
+                 text:SirenSong.loopStatus ? "Repeat: On" : "Repeat: Off"
+                 onClicked: SirenSong.toggleLoop()
+               }
 
                 MenuItem {
                     text: "Clear Play Queue"

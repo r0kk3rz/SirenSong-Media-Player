@@ -39,6 +39,9 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/AlphaMenuGroup.qml \
     qml/pages/PlayerPage.qml
 
+icons.files = $${TARGET}.png
+icons.path = /usr/share/icons/hicolor/86x86/apps
+
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
