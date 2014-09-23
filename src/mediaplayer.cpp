@@ -6,7 +6,7 @@
 
 MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
 {
-    playlist = new QMediaPlaylist;
+    playlist = new MediaPlaylist;
     player = new QMediaPlayer;
     tracker = new trackerinterface;
     player->setPlaylist(playlist);
@@ -15,8 +15,8 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     iDuration = 0;
     iCurrentIndex = 0;
     sCurrentResultsQuery = "";
-    mediaArtist = "Artist";
-    mediaTitle = "Title";
+    mediaArtist = "";
+    mediaTitle = "";
     plModel = new PlaylistModel();
     plModel->setPlaylist(playlist);
     shuffle = false;
@@ -150,7 +150,6 @@ void MediaPlayer :: setArtist(QString artist)
     emit artistChanged();
 }
 
-
 const qint64 &MediaPlayer :: duration ( ) {
     return iDuration;
 }
@@ -180,7 +179,6 @@ void MediaPlayer :: checkPlaylist(int currentIndex)
     iCurrentIndex = currentIndex;
     emit currentIndexChanged();
 
-    qDebug() << "PlaylistIndex: " << currentIndex;
     if(!shuffle && !loop)
     {
         //check if current item is the last in list
@@ -190,8 +188,6 @@ void MediaPlayer :: checkPlaylist(int currentIndex)
             tracker->randomItem();
         }
     }
-
-    qDebug() << "mediaCount: " << playlist->mediaCount();
 
     //cleanup task so list doesnt get too big
     //if(playlist->mediaCount() >= 50)

@@ -39,11 +39,7 @@
 ****************************************************************************/
 
 #include "playlistmodel.h"
-
-#include <QFileInfo>
-#include <QUrl>
-#include <QMediaPlaylist>
-#include <QtSparql>
+#include "mediaplaylist.h"
 
 PlaylistModel::PlaylistModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -98,39 +94,21 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const
     if (index.isValid()) {
         QVariant value = m_data[index];
         if (!value.isValid()) {
-            QUrl location = m_playlist->media(index.row()).canonicalUrl();
+            QVariantMap data;
 
-            QSparqlConnection * conn = new QSparqlConnection("QTRACKER_DIRECT");
-
-            QSparqlQuery metaDataQuery(QString("SELECT ?url ?title ?length ?artist ?album " \
-                                    "WHERE { ?song a nmm:MusicPiece . " \
-                                    "?song nie:title ?title . " \
-                                    "?song nfo:duration ?length . " \
-                                        "?song nie:url ?url . " \
-                                        "?song nmm:performer ?aName . " \
-                                        "?aName nmm:artistName ?artist . " \
-                                        "?song nmm:musicAlbum ?malbum . " \
-                                        "?malbum nmm:albumTitle ?album " \
-                                        "FILTER (?url = \"%1\") " \
-                                               "} LIMIT 1").arg(location.toString(QUrl::FullyEncoded)));
-
-            QSparqlResult * result = conn->exec(metaDataQuery);
-
-            result->waitForFinished();
-
-            result->first();
+            data = m_playlist->getMetaData(index.row());
 
             if(role == Title)
-                return result->value(1).toString();
+                return data.value("Title");
 
             if(role == Artist)
-                return result->value(3).toString();
+                return data.value("Artist");
 
             if(role == Album)
-                return result->value(4).toString();
+                return data.value("Album");
 
             if(role == Duration)
-                return result->value(2).toString();
+                return data.value("Duration");
         }
 
         return value;
@@ -138,12 +116,12 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QMediaPlaylist *PlaylistModel::playlist() const
+MediaPlaylist *PlaylistModel::playlist() const
 {
     return m_playlist;
 }
 
-void PlaylistModel::setPlaylist(QMediaPlaylist *playlist)
+void PlaylistModel::setPlaylist(MediaPlaylist *playlist)
 {
     if (m_playlist) {
         disconnect(m_playlist, SIGNAL(mediaAboutToBeInserted(int,int)), this, SLOT(beginInsertItems(int,int)));

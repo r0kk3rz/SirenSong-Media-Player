@@ -24,7 +24,8 @@ SOURCES += src/SirenSong-Media-Player.cpp \
     src/trackerinterface.cpp \
     src/playlistmodel.cpp \
     src/mediaplayerdbusadaptor.cpp \
-    src/mprisinterface.cpp
+    src/mprisinterface.cpp \
+    src/mediaplaylist.cpp
 
 OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/cover/CoverPage.qml \
@@ -37,7 +38,10 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/AlphaMenu.qml \
     qml/pages/AlphaMenuGroupView.qml \
     qml/pages/AlphaMenuGroup.qml \
-    qml/pages/PlayerPage.qml
+    qml/pages/PlayerPage.qml \
+    qml/pages/SongSelect.qml \
+    qml/pages/ArtistSelect.qml \
+    qml/pages/SearchSelect.qml
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps
@@ -52,5 +56,6 @@ HEADERS += \
     src/trackerinterface.h \
     src/playlistmodel.h \
     src/mediaplayerdbusadaptor.h \
-    src/mprisinterface.h
+    src/mprisinterface.h \
+    src/mediaplaylist.h
 

@@ -89,6 +89,7 @@ Grid {
 
     function _groupListHeight(index) {
         var list = _listForIndex(index)
+
         if (list) {
             return list.implicitHeight
         }
@@ -129,10 +130,8 @@ Grid {
             }
             _currActiveGroup = group
 
-            console.log("rows:" + rows)
-            console.log("columns: " + columns)
-
             var listHeight = _groupListHeight(group.groupIndex)
+
             activated((Math.floor(
                            group.groupIndex / columns) + 1) * group.baseHeight,
                       listHeight, (group.baseHeight * rows) + listHeight,
@@ -254,7 +253,6 @@ Grid {
             property real groupIndex
             property real heightAnimationDuration
             property bool animating: heightAnimation.running
-                                     || fadeInAnimation.running
 
             property bool active: height > 0
             onActiveChanged: {
@@ -271,10 +269,6 @@ Grid {
 
                 heightAnimationDuration = root._groupListOpenAnimationDuration(
                             groupIndex, model.count)
-                if (state == "active") {
-                    // already active, re-fade in with the new list contents
-                    fadeInAnimation.start()
-                }
                 state = "active"
             }
 
@@ -295,32 +289,15 @@ Grid {
 
                         connection: SparqlConnection { driver:"QTRACKER_DIRECT" }
 
-                        // This is the query for the model
-
-                        query: "SELECT ?title ?artist ?length ?album ?url "+
-                               "WHERE { ?song a nmm:MusicPiece . "+
-                               "?song nie:title ?title . "+
-                               "?song nfo:duration ?length . "+
-                               "?song nie:url ?url ." +
-                               "?song nmm:performer ?aName . "+
-                               "?aName nmm:artistName ?artist . "+
-                               "?song nmm:musicAlbum ?malbum . "+
-                               "?malbum nmm:albumTitle ?album "+
-                               "FILTER regex(?title, '^A', 'i') "+
-                               "} " +
-                               "ORDER BY ASC(?title)"
-
                         function filter()
                         {
-                            queryFilterModel.query = "SELECT ?title ?artist ?length ?album ?url "+
+                            queryFilterModel.query = "SELECT ?title ?artist ?length ?url "+
                                     "WHERE { ?song a nmm:MusicPiece . "+
                                     "?song nie:title ?title . "+
                                     "?song nfo:duration ?length . "+
                                     "?song nie:url ?url ." +
                                     "?song nmm:performer ?aName . "+
                                     "?aName nmm:artistName ?artist . "+
-                                    "?song nmm:musicAlbum ?malbum . "+
-                                    "?malbum nmm:albumTitle ?album "+
                                     "FILTER regex(?title, '^"+ queryFilterModel.filterPattern +"', 'i') "+
                                     "} " +
                                     "ORDER BY ASC(?title)"
@@ -354,16 +331,6 @@ Grid {
                     duration: resultsView.heightAnimationDuration
                     easing.type: root.heightAnimationEasing
                 }
-            }
-
-            NumberAnimation {
-                id: fadeInAnimation
-                target: resultsView
-                property: "opacity"
-                from: 0.3
-                to: 1
-                duration: 300
-                easing.type: Easing.InOutQuad
             }
 
             Rectangle {

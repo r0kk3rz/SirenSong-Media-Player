@@ -21,15 +21,15 @@ Page {
 
             PullDownMenu {
 
-               MenuItem {
-                 text:SirenSong.loopStatus ? "Repeat: On" : "Repeat: Off"
-                 onClicked: SirenSong.toggleLoop()
-               }
-
                 MenuItem {
                     text: "Clear Play Queue"
                     onClicked: SirenSong.clearPlaylist()
                 }
+
+               MenuItem {
+                 text:SirenSong.loopStatus ? "Repeat: On" : "Repeat: Off"
+                 onClicked: SirenSong.toggleLoop()
+               }
             }
 
             model: SirenSong.playlistModel

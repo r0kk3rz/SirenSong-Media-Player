@@ -4,6 +4,7 @@
 #include <QtMultimedia>
 #include "trackerinterface.h"
 #include "playlistmodel.h"
+#include "mediaplaylist.h"
 
 class MediaPlayer : public QObject
 {
@@ -54,7 +55,7 @@ signals:
 
 private:
     QMediaPlayer * player;
-    QMediaPlaylist * playlist;
+    MediaPlaylist * playlist;
     int iPlaybackStatus;
     qint64 iPosition;
     qint64 iDuration;

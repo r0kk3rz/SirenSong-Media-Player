@@ -41,13 +41,14 @@
 #ifndef PLAYLISTMODEL_H
 #define PLAYLISTMODEL_H
 
+#include "mediaplaylist.h"
+
 #include <QAbstractItemModel>
-#include <QMediaPlaylist>
 
 class PlaylistModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(QMediaPlaylist* playlist READ playlist WRITE setPlaylist)
+    Q_PROPERTY(MediaPlaylist* playlist READ playlist WRITE setPlaylist)
     Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
 
 public:
@@ -73,8 +74,8 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
-    QMediaPlaylist *playlist() const;
-    void setPlaylist(QMediaPlaylist *playlist);
+    MediaPlaylist *playlist() const;
+    void setPlaylist(MediaPlaylist *playlist);
 
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::DisplayRole);
 
@@ -90,7 +91,7 @@ private slots:
     void setCurrentIndex(int index);
 
 private:
-    QMediaPlaylist *m_playlist;
+    MediaPlaylist *m_playlist;
     QMap<QModelIndex, QVariant> m_data;
     int iCurrentIndex;
 };

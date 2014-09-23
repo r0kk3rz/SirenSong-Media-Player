@@ -26,7 +26,7 @@
 <context>
     <name>Main</name>
     <message>
-        <source>Song Library</source>
+        <source>Library</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -24,8 +24,6 @@ int trackerinterface :: countItems()
 
     countResult->waitForFinished();
 
-    qDebug() << "countResultFinished: " << countResult->isFinished();
-
     countResult->next();
 
     return countResult->value(0).toInt();
@@ -40,8 +38,6 @@ void trackerinterface :: randomItem()
     int randIndex;
 
     randIndex = rand() % count;
-
-    qDebug() << "randomIndex: " << randIndex;
 
     QSparqlQuery urlQuery(QString("SELECT ?url " \
                                     "WHERE { ?song a nmm:MusicPiece . "  \
@@ -59,8 +55,6 @@ void trackerinterface :: randomItem()
     randomResult->waitForFinished();
 
     randomResult->next();
-
-    qDebug() << "randomUrl: " << randomResult->value(0).toString();
 
     emit randomItemComplete(randomResult->value(0).toString());
 }
