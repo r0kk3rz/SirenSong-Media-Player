@@ -85,7 +85,7 @@ Page {
 
         onFlickStarted: _contentYBeforeGroupOpen = -1
 
-        /* pull down for different library menus
+        // pull down for different library menus
         PullDownMenu {
             MenuItem {
                 text: "Search"
@@ -99,7 +99,7 @@ Page {
                 text: "Sort by Song"
                 onClicked: browser.source = "SongSelect.qml"
             }
-        } */
+        }
 
         NumberAnimation {
             id: contentYAnimation

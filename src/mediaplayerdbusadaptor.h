@@ -63,6 +63,7 @@ private:
     QString loopNoneStatus;
     QString loopPlaylistStatus;
     QVariantMap asMetadata;
+    QDBusInterface * dbusVolume;
     double normalPlaybackRate;
     double dVolume;
     bool canTrue;

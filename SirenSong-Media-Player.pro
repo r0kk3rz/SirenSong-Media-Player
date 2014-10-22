@@ -41,7 +41,8 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/PlayerPage.qml \
     qml/pages/SongSelect.qml \
     qml/pages/ArtistSelect.qml \
-    qml/pages/SearchSelect.qml
+    qml/pages/SearchSelect.qml \
+    qml/pages/functions.js
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps

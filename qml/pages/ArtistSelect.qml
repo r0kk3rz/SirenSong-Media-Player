@@ -4,6 +4,10 @@ import QtSparql 1.0
 import com.wayfarer.sirensong 1.0
 
 Column {
+    id: root
+
+    property Item _currActiveGroup
+    property Item _currResultsList
 
     //Top Level Menu
     Repeater {
@@ -18,6 +22,7 @@ Column {
             property alias pressed: mouseArea.pressed
             property alias containsMouse: mouseArea.containsMouse
             property bool highlighted: pressed && containsMouse || artistItem.active
+            property int baseHeight: Theme.itemSizeSmall
 
             MouseArea {
                 id: mouseArea
@@ -31,7 +36,39 @@ Column {
                     opacity: highlighted ? 0.1 : 0.3
                 }
 
-                Label { x: 30; text: artistName; anchors.verticalCenter: parent.verticalCenter }
+                Item{
+                    height: Theme.itemSizeSmall
+                    x:30
+                    Label { text: artistName; anchors.verticalCenter: parent.verticalCenter }
+                }
+          }
+
+            function activate(artistItem)
+            {
+                if(!artistItem.active)
+                {
+                    if(root._currActiveGroup != null)
+                    {
+                        deactivate(root._currActiveGroup);
+                    }
+
+                    _currResultsList = albumListComponent.createObject(artistItem);
+                    _currResultsList.open(artistName);
+                    artistItem.active = true;
+                    artistItem.height = artistItem.height + 200;
+                    root._currActiveGroup = artistItem;
+                }
+                else
+                {
+                    deactivate(artistItem)
+                }
+            }
+
+            function deactivate(artistItem)
+            {
+                artistItem.active = false;
+                artistItem.height = artistItem.baseHeight;
+                _currResultsList.close();
             }
         }
     }
@@ -60,10 +97,42 @@ Column {
 
     Component {
         id: albumListComponent
+
         ColumnView {
             id: albumListView
             itemHeight: Theme.itemSizeSmall
-            model: emptyModel
+            model: albumListQueryModel
+
+            x: -parent.x
+            y: Theme.itemSizeSmall
+            width: root.width
+
+            delegate: ListItem {
+                width: parent.width
+                height: Theme.itemSizeSmall
+                Row { Label { text: albumTitle } }
+                }
+
+            states: State {
+                name: "active"
+                PropertyChanges {
+                    target: albumListView
+                    height: albumListView.implicitHeight
+                }
+            }
+
+            function open(artistName)
+            {
+                albumListQueryModel.filter(artistName)
+                model = albumListQueryModel
+                state = "active";
+            }
+
+            function close()
+            {
+                state = "";
+                model = emptyModel;
+            }
 
             SparqlListModel {
                 id: albumListQueryModel
@@ -71,6 +140,13 @@ Column {
                     id: sparqlConnection
                     driver: "QTRACKER_DIRECT"
                 }
+
+                query: "SELECT ?albumTitle " + "WHERE { ?album a nmm:MusicAlbum . " +
+                       "?album nmm:albumArtist ?albumArtist . " +
+                       "?album nmm:albumTitle ?albumTitle . " +
+                       "?albumArtist nmm:artistName ?artistName " +
+                       "FILTER (?artistName =  '"+ "Amon Amarth" +"') "+
+                       "} "
 
                 function filter(filterText)
                 {
@@ -84,6 +160,6 @@ Column {
                     albumListQueryModel.reload()
                 }
             }
-        }
+        } 
     }
 }

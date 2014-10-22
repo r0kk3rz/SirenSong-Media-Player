@@ -2,6 +2,7 @@ import QtQuick 2.0
 import com.wayfarer.sirensong 1.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
+import "functions.js" as UIFunctions
 
 Page {
     Drawer {
@@ -39,18 +40,7 @@ Page {
                 width: parent.width
                 focus: index == playlistView.model.currentIndex ? true : false
 
-                function durationString(length) {
-                    var iMinutes = Math.floor(length / 60)
-                    var iSeconds = (length % 60)
 
-                    if (iMinutes.toString().length == 1)
-                        iMinutes = ("0" + iMinutes)
-
-                    if (iSeconds.toString().length == 1)
-                        iSeconds = ("0" + iSeconds)
-
-                    return iMinutes + ":" + iSeconds
-                }
 
                 onClicked: SirenSong.playIndex(index)
 
@@ -59,7 +49,7 @@ Page {
                     x: 10
 
                     Label {
-                        text: durationString(duration)
+                        text: UIFunctions.durationString(duration)
                         height: Theme.itemSizeHuge
                         font.pixelSize: Theme.fontSizeExtraLarge
                         color: playlistItem.focus ? Theme.highlightColor : Theme.secondaryColor
@@ -70,11 +60,13 @@ Page {
                             text: title
                             font.pixelSize: Theme.fontSizeMedium
                             color: playlistItem.focus ? Theme.highlightColor : Theme.primaryColor
+                            truncationMode: TruncationMode.Fade
                         }
                         Label {
                             text: artist
                             font.pixelSize: Theme.fontSizeExtraSmall
                             color: playlistItem.focus ? Theme.highlightColor : Theme.secondaryColor
+                            truncationMode: TruncationMode.Fade
                         }
                     }
                 }
@@ -125,24 +117,30 @@ Page {
                         id: previous
                         icon.source: "image://theme/icon-m-previous"
                         onClicked: SirenSong.previous()
-                        width: parent.width / 3
+                        width: parent.width / 5
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
-                    //IconButton {
-                    //    id: stop
-                    //    icon.source: "image://theme/icon-l-clear"
-                    //    onClicked: SirenSong.stop()
-                    //    width: parent.width / 4
-                    //    anchors.verticalCenter: parent.verticalCenter
-                    //}
+                    IconButton {
+                        id: seekPrevious
+                        icon.source: "image://theme/icon-m-left"
+                        width: parent.width / 5
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
 
                     IconButton {
                         id: play
                         icon.source: SirenSong.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
                         onClicked: SirenSong.playbackStatus === 1 ? SirenSong.pause(
                                                                         ) : SirenSong.play()
-                        width: parent.width / 3
+                        width: parent.width / 5
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    IconButton {
+                        id: seekNext
+                        icon.source: "image://theme/icon-m-right"
+                        width: parent.width / 5
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
@@ -150,7 +148,7 @@ Page {
                         id: next
                         icon.source: "image://theme/icon-m-next"
                         onClicked: SirenSong.next()
-                        width: parent.width / 3
+                        width: parent.width / 5
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }

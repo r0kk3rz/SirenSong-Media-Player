@@ -27,8 +27,8 @@ void MediaPlaylist::insertMetaData(int startIndex, int endIndex)
                                     "?song nie:url ?url . " \
                                     "?song nmm:performer ?aName . " \
                                     "?aName nmm:artistName ?artist . " \
-                                    "?song nmm:musicAlbum ?malbum . " \
-                                    "?malbum nmm:albumTitle ?album " \
+                                    "OPTIONAL { ?song nmm:musicAlbum ?malbum . " \
+                                    "?malbum nmm:albumTitle ?album } " \
                                     "FILTER (?url = \"%1\") " \
                                            "} LIMIT 1").arg(location.toString(QUrl::FullyEncoded)));
 

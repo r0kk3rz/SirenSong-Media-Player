@@ -10,8 +10,6 @@ CoverBackground {
         source: "SirenSong-Media-Player.png"
     }
 
-
-
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
@@ -22,6 +20,7 @@ CoverBackground {
             text: "SirenSong"
             color: Theme.secondaryColor
             anchors.bottomMargin: 20
+            visible: SirenSong.playbackStatus === 0
         }
 
         Label {

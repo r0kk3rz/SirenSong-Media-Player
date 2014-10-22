@@ -19,6 +19,8 @@ mediaplayerDbusAdaptor::mediaplayerDbusAdaptor(MediaPlayer * mediaplayer) : QDBu
     QObject::connect(mp, &MediaPlayer::playbackStatusChanged, this, &mediaplayerDbusAdaptor::playbackStatusChanged);
     QObject::connect(mp, &MediaPlayer::artistChanged, this, &mediaplayerDbusAdaptor::metaDataChanged);
 
+    dbusVolume = new QDBusInterface("com.Meego.MainVolume2", "/com/meego/mainvolume2", "com.Meego.MainVolume2" );
+
 }
 
 void mediaplayerDbusAdaptor::Play()
@@ -135,6 +137,13 @@ const double &mediaplayerDbusAdaptor::MaximumRate()
 
 const double &mediaplayerDbusAdaptor::Volume()
 {
+   QDBusReply<uint32_t> reply = dbusVolume->call("CurrentStep");
+
+   if(reply.isValid())
+   {
+       dVolume = reply.value();
+   }
+
     return dVolume;
 }
 
