@@ -11,13 +11,11 @@ trackerinterface::trackerinterface(QObject *parent) :
 
 int trackerinterface :: countItems()
 {
-    QSparqlQuery countQuery("SELECT count(?url) AS ?itemCount" \
+    QSparqlQuery countQuery("SELECT count(?url) AS ?itemCount " \
                             "WHERE { ?song a nmm:MusicPiece . " \
-                            "?song nie:title ?title . " \
-                            "?song nfo:duration ?length . " \
                                 "?song nie:url ?url . " \
-                                "?song nmm:performer ?aName . " \
-                                "?aName nmm:artistName ?artist  " \
+                            "?song nie:mimeType ?mime " \
+                            "FILTER ( ?mime != 'audio/x-mpegurl') "
                             "}");
 
     countResult = conn->exec(countQuery);
@@ -41,11 +39,9 @@ void trackerinterface :: randomItem()
 
     QSparqlQuery urlQuery(QString("SELECT ?url " \
                                     "WHERE { ?song a nmm:MusicPiece . "  \
-                                    "?song nie:title ?title . " \
-                                    "?song nfo:duration ?length . " \
                                     "?song nie:url ?url . " \
-                                    "?song nmm:performer ?aName . " \
-                                    "?aName nmm:artistName ?artist " \
+                                  "?song nie:mimeType ?mime " \
+                                  "FILTER ( ?mime != 'audio/x-mpegurl') "
                                     "} " \
                           "OFFSET %1" \
                                   " LIMIT 1").arg(randIndex) );

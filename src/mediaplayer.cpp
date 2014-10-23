@@ -25,9 +25,10 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
+    QObject::connect(player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::mediaChanged);
 
     //Old connection syntax due to overloaded metaDataChanged()
-    QObject::connect(player, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataCallback(QString,QVariant)));
+    QObject::connect(player, SIGNAL(metaDataChanged()), this, SLOT(metaDataCallback()));
 
     QObject::connect(playlist, &QMediaPlaylist::currentIndexChanged, this, &MediaPlayer::checkPlaylist);
 
@@ -200,11 +201,33 @@ void MediaPlayer :: checkPlaylist(int currentIndex)
     //}
 }
 
-void MediaPlayer :: metaDataCallback(const QString &key, const QVariant &value)
+void MediaPlayer :: metaDataCallback()
 {
-    if(key == QMediaMetaData::Title)
-        setTitle(value.toString());
-        
-    if(key == QMediaMetaData::AlbumArtist)
-        setArtist((value.toString()));
+
+    if(player->metaData(QMediaMetaData::Title).toString() != "")
+    {
+        setTitle(player->metaData(QMediaMetaData::Title).toString());
+    }
+    else
+    {
+        setTitle(QFileInfo(player->currentMedia().canonicalUrl().toString()).fileName());
+    }
+
+    if(player->metaData(QMediaMetaData::AlbumArtist).toString() != "")
+    {
+        setArtist(player->metaData(QMediaMetaData::AlbumArtist).toString());
+    }
+    else
+    {
+        setArtist("Unknown Artist");
+    }
+
+
+}
+
+void  MediaPlayer :: mediaChanged(const QMediaContent &media)
+{
+    qDebug() << "mediaChanged";
+    //setTitle(media.canonicalUrl().toString());
+    //setArtist("Unknown Artist");
 }

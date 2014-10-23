@@ -7,7 +7,6 @@ Column {
     id: root
 
     property Item _currActiveGroup
-    property Item _currResultsList
 
     //Top Level Menu
     Repeater {
@@ -16,9 +15,10 @@ Column {
         Item {
             id: artistItem
             width: parent.width
-            height: Theme.itemSizeSmall
+            height: Theme.itemSizeSmall + (groupResultsList != null ? groupResultsList.implicitHeight : 0)
 
             property bool active
+            property Item groupResultsList
             property alias pressed: mouseArea.pressed
             property alias containsMouse: mouseArea.containsMouse
             property bool highlighted: pressed && containsMouse || artistItem.active
@@ -52,10 +52,10 @@ Column {
                         deactivate(root._currActiveGroup);
                     }
 
-                    _currResultsList = albumListComponent.createObject(artistItem);
-                    _currResultsList.open(artistName);
+                    groupResultsList = albumListComponent.createObject(artistItem);
+                    groupResultsList.open(artistName);
                     artistItem.active = true;
-                    artistItem.height = artistItem.height + 200;
+
                     root._currActiveGroup = artistItem;
                 }
                 else
@@ -67,8 +67,7 @@ Column {
             function deactivate(artistItem)
             {
                 artistItem.active = false;
-                artistItem.height = artistItem.baseHeight;
-                _currResultsList.close();
+                artistItem.groupResultsList.close();
             }
         }
     }
@@ -110,7 +109,8 @@ Column {
             delegate: ListItem {
                 width: parent.width
                 height: Theme.itemSizeSmall
-                Row { Label { text: albumTitle } }
+
+                Label { x:60; text: albumTitle; anchors.verticalCenter: parent.verticalCenter }
                 }
 
             states: State {
