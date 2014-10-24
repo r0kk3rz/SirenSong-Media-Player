@@ -25,7 +25,6 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
-    QObject::connect(player, &QMediaPlayer::currentMediaChanged, this, &MediaPlayer::mediaChanged);
 
     //Old connection syntax due to overloaded metaDataChanged()
     QObject::connect(player, SIGNAL(metaDataChanged()), this, SLOT(metaDataCallback()));
@@ -223,11 +222,4 @@ void MediaPlayer :: metaDataCallback()
     }
 
 
-}
-
-void  MediaPlayer :: mediaChanged(const QMediaContent &media)
-{
-    qDebug() << "mediaChanged";
-    //setTitle(media.canonicalUrl().toString());
-    //setArtist("Unknown Artist");
 }

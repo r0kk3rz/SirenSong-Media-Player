@@ -49,12 +49,12 @@ import "functions.js" as UIFunctions
 
                 Column {
                     Label {
-                        text: title
+                        text: title != null ? title : filename
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                     }
                     Label {
-                        text: artist
+                        text: artist != null ? artist : "Unknown Artist"
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
                     }

@@ -41,7 +41,7 @@ void trackerinterface :: randomItem()
                                     "WHERE { ?song a nmm:MusicPiece . "  \
                                     "?song nie:url ?url . " \
                                   "?song nie:mimeType ?mime " \
-                                  "FILTER ( ?mime != 'audio/x-mpegurl') "
+                                  "FILTER ( ?mime != 'audio/x-mpegurl') " \
                                     "} " \
                           "OFFSET %1" \
                                   " LIMIT 1").arg(randIndex) );

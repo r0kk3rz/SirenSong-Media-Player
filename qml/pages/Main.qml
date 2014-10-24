@@ -87,14 +87,17 @@ Page {
 
         // pull down for different library menus
         PullDownMenu {
+            /*
             MenuItem {
                 text: "Search"
                 onClicked: browser.source = "SearchSelect.qml"
-            }
+            } */
+
             MenuItem {
                 text: "Sort by Artist"
                 onClicked: browser.source = "ArtistSelect.qml"
             }
+
             MenuItem {
                 text: "Sort by Song"
                 onClicked: browser.source = "SongSelect.qml"

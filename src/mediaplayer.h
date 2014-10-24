@@ -77,7 +77,6 @@ private slots:
     void setArtist(QString artist);
     void checkPlaylist(int currentIndex);
     void metaDataCallback();
-    void mediaChanged(const QMediaContent &media);
 };
 
 #endif // MEDIAPLAYER_H

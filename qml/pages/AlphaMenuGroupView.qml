@@ -291,13 +291,18 @@ Grid {
 
                         function filter()
                         {
-                            queryFilterModel.query = "SELECT ?title ?artist ?length ?url "+
+                            queryFilterModel.query = "SELECT ?title ?artist ?length ?url ?filename"+
                                     "WHERE { ?song a nmm:MusicPiece . "+
-                                    "?song nie:title ?title . "+
-                                    "?song nfo:duration ?length . "+
+                                    "OPTIONAL { ?song nie:title ?title } "+
+                                    "OPTIONAL {?song nfo:duration ?length } "+
                                     "?song nie:url ?url ." +
+                                    "?song nfo:fileName ?filename . " +
+                                    "OPTIONAL { "+
                                     "?song nmm:performer ?aName . "+
                                     "?aName nmm:artistName ?artist . "+
+                                    "} "+
+                                    "?song nie:mimeType ?mime " +
+                                    "FILTER ( ?mime != 'audio/x-mpegurl') " +
                                     "FILTER regex(?title, '^"+ queryFilterModel.filterPattern +"', 'i') "+
                                     "} " +
                                     "ORDER BY ASC(?title)"

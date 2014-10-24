@@ -18,8 +18,6 @@ void MediaPlaylist::insertMetaData(int startIndex, int endIndex)
     {
         QUrl location = this->media(index).canonicalUrl();
 
-        qDebug() << "queued media: " << location;
-
         QSparqlConnection * conn = new QSparqlConnection("QTRACKER_DIRECT");
 
         QSparqlQuery metaDataQuery(QString("SELECT ?url ?title ?length ?artist ?album ?filename " \
@@ -29,10 +27,12 @@ void MediaPlaylist::insertMetaData(int startIndex, int endIndex)
                                     "?song nfo:fileName ?filename . " \
                                     "OPTIONAL { " \
                                            "?song nie:title ?title . " \
+                                    " } " \
+                                    "OPTIONAL { " \
                                            "?song nmm:performer ?aName . " \
                                            "?aName nmm:artistName ?artist . " \
-                                           "?song nmm:performer ?aName . " \
-                                            "?aName nmm:artistName ?artist . " \
+                                    " } " \
+                                    "OPTIONAL { " \
                                             "?song nmm:musicAlbum ?malbum . " \
                                            "?malbum nmm:albumTitle ?album " \
                                     " } " \
