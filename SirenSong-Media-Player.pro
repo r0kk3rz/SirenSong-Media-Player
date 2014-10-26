@@ -13,8 +13,7 @@
 TARGET = SirenSong-Media-Player
 
 CONFIG += sailfishapp \
-            qtsparql \
-            id3tag
+            qtsparql
 
 QT += multimedia \
         dbus
@@ -42,7 +41,7 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/SongSelect.qml \
     qml/pages/ArtistSelect.qml \
     qml/pages/SearchSelect.qml \
-    qml/pages/functions.js
+    qml/pages/functions.js \
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps
@@ -50,7 +49,9 @@ icons.path = /usr/share/icons/hicolor/86x86/apps
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
-TRANSLATIONS += translations/SirenSong-Media-Player-de.ts
+CONFIG += sailfishapp_i18n_unfinished
+TRANSLATIONS += translations/SirenSong-Media-Player-de.ts \
+translations/SirenSong-Media-Player-fi.ts
 
 HEADERS += \
     src/mediaplayer.h \

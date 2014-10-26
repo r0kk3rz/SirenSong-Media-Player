@@ -23,12 +23,12 @@ Page {
             PullDownMenu {
 
                 MenuItem {
-                    text: "Clear Play Queue"
+                    text: qsTr("Clear Play Queue")
                     onClicked: SirenSong.clearPlaylist()
                 }
 
                MenuItem {
-                 text:SirenSong.loopStatus ? "Repeat: On" : "Repeat: Off"
+                   text:SirenSong.loopStatus ? qsTr("Repeat: On") : qsTr("Repeat: Off")
                  onClicked: SirenSong.toggleLoop()
                }
             }

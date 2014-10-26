@@ -15,7 +15,7 @@ Column {
         Item {
             id: artistItem
             width: parent.width
-            height: Theme.itemSizeSmall + (groupResultsList != null ? groupResultsList.implicitHeight : 0)
+            height: Theme.itemSizeSmall + ((groupResultsList != null) && (active == true) ? groupResultsList.height : 0)
 
             property bool active
             property Item groupResultsList
@@ -97,41 +97,63 @@ Column {
     Component {
         id: albumListComponent
 
-        ColumnView {
+        Column {
             id: albumListView
-            itemHeight: Theme.itemSizeSmall
-            model: albumListQueryModel
+            height: (albumListQueryModel.count * Theme.itemSizeSmall) + submenuHeight
 
             x: -parent.x
             y: Theme.itemSizeSmall
             width: root.width
 
-            delegate: ListItem {
+            property Item songListItem
+            property int submenuHeight: (songListItem != null) && (songListItem.active == true) ? songListItem.implicitHeight : 0
+
+            Repeater {
+                id: albumRepeater
+                model: albumListQueryModel
+
+                Item {
+                id: albumItem
+                height: Theme.itemSizeSmall + ((songListItem != null) && (active == true) ? songListItem.implicitHeight : 0)
+                width: parent.width
+                property bool active: false
+
+
+                ListItem {
                 width: parent.width
                 height: Theme.itemSizeSmall
-
+                onClicked: activate(parent)
                 Label { x:60; text: albumTitle; anchors.verticalCenter: parent.verticalCenter }
                 }
 
-            states: State {
-                name: "active"
-                PropertyChanges {
-                    target: albumListView
-                    height: albumListView.implicitHeight
+                function activate(albumItem)
+                {
+                    if(!albumItem.active)
+                    {
+                        songListItem = songListComponent.createObject(albumItem);
+                        albumItem.active = true
+                        songListItem.open(albumTitle)
+                    }
+                    else
+                    {
+                        albumItem.active = false
+                        songListItem.close()
+                    }
                 }
+            }
             }
 
             function open(artistName)
             {
                 albumListQueryModel.filter(artistName)
-                model = albumListQueryModel
+                albumRepeater.model = albumListQueryModel
                 state = "active";
             }
 
             function close()
             {
                 state = "";
-                model = emptyModel;
+                albumRepeater.model = emptyModel;
             }
 
             SparqlListModel {
@@ -140,13 +162,6 @@ Column {
                     id: sparqlConnection
                     driver: "QTRACKER_DIRECT"
                 }
-
-                query: "SELECT ?albumTitle " + "WHERE { ?album a nmm:MusicAlbum . " +
-                       "?album nmm:albumArtist ?albumArtist . " +
-                       "?album nmm:albumTitle ?albumTitle . " +
-                       "?albumArtist nmm:artistName ?artistName " +
-                       "FILTER (?artistName =  '"+ "Amon Amarth" +"') "+
-                       "} "
 
                 function filter(filterText)
                 {
@@ -160,6 +175,63 @@ Column {
                     albumListQueryModel.reload()
                 }
             }
-        } 
+        }
+    }
+
+    Component {
+        id: songListComponent
+
+        ColumnView {
+            id: songListView
+            itemHeight: Theme.itemSizeSmall
+            model: songListQueryModel
+            x: -parent.x
+            y: Theme.itemSizeSmall
+            width: root.width
+
+            property bool active: false
+
+            delegate: ListItem {
+                            width: parent.width
+                            height: Theme.itemSizeSmall
+                            onClicked: SirenSong.play(url)
+
+                            Label { x:90; text: songtitle; anchors.verticalCenter: parent.verticalCenter }
+                            }
+
+            function open(albumTitle)
+            {
+                active = true;
+                songListQueryModel.filter(albumTitle)
+            }
+
+            function close()
+            {
+                active = false;
+            }
+
+            SparqlListModel {
+                id: songListQueryModel
+                connection: SparqlConnection {
+                    id: sparqlConnection
+                    driver: "QTRACKER_DIRECT"
+                }
+
+                function filter(filterText)
+                {
+                    songListQueryModel.query = "SELECT ?songtitle ?url " +
+                            "WHERE { ?song a nmm:MusicPiece . " +
+                            "?song nie:url ?url . " +
+                            "?song nie:title ?songtitle . " +
+                            "?song nmm:trackNumber ?tracknumber . "+
+                            "?song nmm:musicAlbum ?album . " +
+                            "?album nmm:albumArtist ?albumArtist . " +
+                            "?album nmm:albumTitle ?albumTitle . " +
+                            "?albumArtist nmm:artistName ?artistName " +
+                            "FILTER (?albumTitle =  '"+ filterText +"') "+
+                            "} "
+                }
+            }
+        }
     }
 }

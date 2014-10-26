@@ -291,7 +291,7 @@ Grid {
 
                         function filter()
                         {
-                            queryFilterModel.query = "SELECT ?title ?artist ?length ?url ?filename"+
+                            queryFilterModel.query = "SELECT ?title ?artist ?length ?url ?filename "+
                                     "WHERE { ?song a nmm:MusicPiece . "+
                                     "OPTIONAL { ?song nie:title ?title } "+
                                     "OPTIONAL {?song nfo:duration ?length } "+

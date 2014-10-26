@@ -89,17 +89,17 @@ Page {
         PullDownMenu {
             /*
             MenuItem {
-                text: "Search"
+                text: qsTr("Search")
                 onClicked: browser.source = "SearchSelect.qml"
             } */
 
             MenuItem {
-                text: "Sort by Artist"
+                text: qsTr("Sort by Artist")
                 onClicked: browser.source = "ArtistSelect.qml"
             }
 
             MenuItem {
-                text: "Sort by Song"
+                text: qsTr("Sort by Song")
                 onClicked: browser.source = "SongSelect.qml"
             }
         }

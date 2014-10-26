@@ -4,7 +4,6 @@ X-Nemo-Application-Type=silica-qt5
 Icon=SirenSong-Media-Player
 Exec=SirenSong-Media-Player
 Name=SirenSong
-# translation example:
-# your app name in German locale (de)
-Name[de]=SirenSong-Media-Player
+Name[de]=SirenSong
+Name[fi]=SirenSong
 

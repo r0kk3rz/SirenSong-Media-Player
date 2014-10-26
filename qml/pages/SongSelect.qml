@@ -24,7 +24,7 @@ import "functions.js" as UIFunctions
 
             menu: ContextMenu {
                 MenuItem {
-                    text: "Add to Play Queue"
+                    text: qsTr("Add to Play Queue")
                     onClicked: SirenSong.addToPlaylist(url)
                 }
             }
@@ -54,7 +54,7 @@ import "functions.js" as UIFunctions
                         color: Theme.primaryColor
                     }
                     Label {
-                        text: artist != null ? artist : "Unknown Artist"
+                        text: artist != null ? artist : qsTr("Unknown Artist")
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
                     }
