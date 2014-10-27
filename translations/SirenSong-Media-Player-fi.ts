@@ -9,41 +9,41 @@
     </message>
     <message>
         <source>Sort by Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Artistit</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaikki Kappaleet</translation>
     </message>
 </context>
 <context>
     <name>PlayerPage</name>
     <message>
         <source>Play Queue</source>
-        <translation>Toistojonon</translation>
+        <translation>Soitettavien Jono</translation>
     </message>
     <message>
         <source>Clear Play Queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyhjentää Soitettavien Jono</translation>
     </message>
     <message>
         <source>Repeat: On</source>
-        <translation type="unfinished"></translation>
+        <translation>Toisto: On</translation>
     </message>
     <message>
         <source>Repeat: Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Toisto: Off</translation>
     </message>
 </context>
 <context>
     <name>SongSelect</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää Soitettavien Jonoon</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuntematon Artisti</translation>
     </message>
 </context>
 </TS>
