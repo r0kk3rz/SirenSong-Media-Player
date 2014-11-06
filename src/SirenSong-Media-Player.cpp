@@ -1,7 +1,5 @@
-#ifdef QT_QML_DEBUG
-#include <QtQuick>
-#endif
 
+#include <QtQuick>
 #include <sailfishapp.h>
 #include "mediaplayer.h"
 #include "mediaplayerdbusadaptor.h"
@@ -26,21 +24,19 @@ static QObject *player(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 int main(int argc, char *argv[])
 {
+    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
+
     QDBusConnection::sessionBus().registerService("org.mpris.MediaPlayer2.sirensong");
 
     qmlRegisterSingletonType<MediaPlayer>("com.wayfarer.sirensong", 1, 0, "SirenSong", player);
 
     qmlRegisterType<PlaylistModel>("com.wayfarer.sirensong", 1, 0, "PlaylistModel");
 
-    // SailfishApp::main() will display "qml/template.qml", if you need more
-    // control over initialization, you can use:
-    //
-    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
-    //   - SailfishApp::createView() to get a new QQuickView * instance
-    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
-    //
-    // To display the view, call "show()" (will show fullscreen on device).
+    view->setSource(SailfishApp::pathTo("qml/SirenSong-Media-Player.qml"));
+    view->show();
 
-    return SailfishApp::main(argc, argv);
+    return app->exec();
 }
 

@@ -12,6 +12,8 @@ public:
 
 signals:
     void randomItemComplete(QString url);
+    void countItemsComplete(int count);
+
 
 public slots:
     void randomItem();
@@ -22,7 +24,10 @@ private:
     QSparqlConnection * conn;
 
 private slots:
-    int countItems();
+    void countItems();
+    void random(int count);
+    void countItemCallback();
+    void randomItemCallback();
 };
 
 #endif // TRACKERINTERFACE_H

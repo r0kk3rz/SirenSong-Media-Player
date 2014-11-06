@@ -63,30 +63,10 @@ int PlaylistModel::rowCount(const QModelIndex &parent) const
     return m_playlist && !parent.isValid() ? m_playlist->mediaCount() : 0;
 }
 
-int PlaylistModel::columnCount(const QModelIndex &parent) const
-{
-    return !parent.isValid() ? ColumnCount : 0;
-}
 
 const int &PlaylistModel::currentIndex()
 {
     return iCurrentIndex;
-}
-
-QModelIndex PlaylistModel::index(int row, int column, const QModelIndex &parent) const
-{
-    return m_playlist && !parent.isValid()
-            && row >= 0 && row < m_playlist->mediaCount()
-            && column >= 0 && column < ColumnCount
-        ? createIndex(row, column)
-        : QModelIndex();
-}
-
-QModelIndex PlaylistModel::parent(const QModelIndex &child) const
-{
-    Q_UNUSED(child);
-
-    return QModelIndex();
 }
 
 QVariant PlaylistModel::data(const QModelIndex &index, int role) const
@@ -148,18 +128,8 @@ void PlaylistModel::setPlaylist(MediaPlaylist *playlist)
     endResetModel();
 }
 
-bool PlaylistModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-    Q_UNUSED(role);
-    m_data[index] = value;
-    qDebug() << "PlaylistModel Data: " << value;
-    emit dataChanged(index, index);
-    return true;
-}
-
 void PlaylistModel::beginInsertItems(int start, int end)
 {
-    m_data.clear();
     beginInsertRows(QModelIndex(), start, end);
 }
 
@@ -170,7 +140,6 @@ void PlaylistModel::endInsertItems()
 
 void PlaylistModel::beginRemoveItems(int start, int end)
 {
-    m_data.clear();
     beginRemoveRows(QModelIndex(), start, end);
 }
 
@@ -181,14 +150,11 @@ void PlaylistModel::endRemoveItems()
 
 void PlaylistModel::changeItems(int start, int end)
 {
-    qDebug() << "playlistModel changed: " << start << " " << end;
-    m_data.clear();
     emit dataChanged(index(start,0), index(end,ColumnCount));
 }
 
 void PlaylistModel::setCurrentIndex(int index)
 {
-    qDebug() << "playlistModel currentIndex: " << index;
     iCurrentIndex = index;
     emit currentIndexChanged();
 }

@@ -52,6 +52,7 @@ class PlaylistModel : public QAbstractListModel
     Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged)
 
 public:
+
     enum Column
     {
         Title = Qt::UserRole + 1,
@@ -65,19 +66,14 @@ public:
 
     QHash<int, QByteArray> roleNames() const;
 
-    Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    Q_INVOKABLE int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    const int &currentIndex( );
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-    QModelIndex parent(const QModelIndex &child) const;
+    const int &currentIndex( );
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     MediaPlaylist *playlist() const;
     void setPlaylist(MediaPlaylist *playlist);
-
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::DisplayRole);
 
 signals:
     void currentIndexChanged();

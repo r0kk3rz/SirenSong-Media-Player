@@ -2,11 +2,13 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtSparql 1.0
 import com.wayfarer.sirensong 1.0
+import "functions.js" as UIFunctions
 
 Column {
     id: root
 
     property Item _currActiveGroup
+    property Item _currActiveAlbum
 
     //Top Level Menu
     Repeater {
@@ -88,7 +90,8 @@ Column {
         }
 
         // This is the query for the model
-        query: "SELECT ?artistName " + "WHERE { ?album a nmm:MusicAlbum . " +
+        query: "SELECT ?artistName ?albumArtist " +
+               "WHERE { ?album a nmm:MusicAlbum . " +
                "?album nmm:albumArtist ?albumArtist . " +
                "?albumArtist nmm:artistName ?artistName " +
                "} GROUP BY ?artistName ORDER BY ASC(?artistName) "
@@ -115,7 +118,7 @@ Column {
                 Item {
                 id: albumItem
                 height: Theme.itemSizeSmall + ((songListItem != null) && (active == true) ? songListItem.implicitHeight : 0)
-                width: parent.width
+                width: albumListView.width
                 property bool active: false
 
 
@@ -130,15 +133,29 @@ Column {
                 {
                     if(!albumItem.active)
                     {
+                        if(root._currActiveAlbum != null)
+                        {
+                            deactivate(root._currActiveAlbum)
+                        }
+
                         songListItem = songListComponent.createObject(albumItem);
                         albumItem.active = true
                         songListItem.open(albumTitle)
+
+                        root._currActiveAlbum = albumItem
                     }
                     else
                     {
-                        albumItem.active = false
-                        songListItem.close()
+                        deactivate(albumItem)
                     }
+                }
+
+                function deactivate(albumItem)
+                {
+                    albumItem.active = false;
+
+                    if(albumListView.songListItem.active == true)
+                        albumListView.songListItem.close();
                 }
             }
             }
@@ -192,26 +209,70 @@ Column {
             property bool active: false
 
             delegate: ListItem {
-                            width: parent.width
-                            height: Theme.itemSizeSmall
-                            onClicked: SirenSong.play(url)
+                width: parent.width
+                id: songList
 
-                            Label { x:90; text: songtitle; anchors.verticalCenter: parent.verticalCenter }
-                            }
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("Add to Play Queue")
+                        onClicked: SirenSong.addToPlaylist(url)
+                    }
+                }
+
+                onClicked: {
+                    SirenSong.play(url)
+                    if (libraryPage.forwardNavigation) {
+                        pageStack.navigateForward(PageStackAction.Animated)
+                    }
+                }
+
+                Row {
+                    spacing: 20
+                    x: 10
+
+                    Label {
+                        text: UIFunctions.durationString(length)
+                        height: Theme.itemSizeHuge
+                        font.pixelSize: Theme.fontSizeExtraLarge
+                        color: Theme.secondaryColor
+                    }
+
+                    Column {
+                        Label {
+                            text: title != null ? title : filename
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.primaryColor
+                        }
+                        Label {
+                            text: artist != null ? artist : qsTr("Unknown Artist")
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            color: Theme.secondaryColor
+                        }
+                    }
+                }
+            }
 
             function open(albumTitle)
             {
                 active = true;
                 songListQueryModel.filter(albumTitle)
+                songListView.model = songListQueryModel
             }
 
             function close()
             {
+                songListView.model = emptyModel
                 active = false;
+            }
+
+            //Empty List
+            ListModel {
+                id: emptyModel
             }
 
             SparqlListModel {
                 id: songListQueryModel
+                query: ""
                 connection: SparqlConnection {
                     id: sparqlConnection
                     driver: "QTRACKER_DIRECT"
@@ -219,17 +280,20 @@ Column {
 
                 function filter(filterText)
                 {
-                    songListQueryModel.query = "SELECT ?songtitle ?url " +
+                    songListQueryModel.query = "SELECT ?title ?artist ?url ?length ?filename " +
                             "WHERE { ?song a nmm:MusicPiece . " +
                             "?song nie:url ?url . " +
-                            "?song nie:title ?songtitle . " +
+                            "OPTIONAL { ?song nie:title ?title } " +
+                            "?song nfo:duration ?length . " +
+                            "?song nfo:fileName ?filename . " +
                             "?song nmm:trackNumber ?tracknumber . "+
                             "?song nmm:musicAlbum ?album . " +
                             "?album nmm:albumArtist ?albumArtist . " +
                             "?album nmm:albumTitle ?albumTitle . " +
-                            "?albumArtist nmm:artistName ?artistName " +
+                            "?albumArtist nmm:artistName ?artist " +
                             "FILTER (?albumTitle =  '"+ filterText +"') "+
-                            "} "
+                            "} " +
+                            "ORDER BY ASC(?tracknumber)"
                 }
             }
         }

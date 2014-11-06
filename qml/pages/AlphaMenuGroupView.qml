@@ -220,7 +220,9 @@ Grid {
                 }
         }
 
-        Component.onCompleted: countItems();
+        Component.onCompleted: {
+            countItems();
+        }
     }
 
     Repeater {

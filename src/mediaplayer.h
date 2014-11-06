@@ -39,6 +39,7 @@ public slots:
     void pause( );
     void stop( );
     void addToPlaylist(QString url);
+    void addToPlaylist(QList<QString> items);
     void clearPlaylist();
     void toggleLoop();
     //void setCurrentResultsQuery(QString query);

@@ -7,9 +7,17 @@ trackerinterface::trackerinterface(QObject *parent) :
 {
     srand(QDateTime::currentMSecsSinceEpoch());
     conn = new QSparqlConnection("QTRACKER_DIRECT");
+
+    QObject::connect(this, &trackerinterface::countItemsComplete, this, &trackerinterface::random);
 }
 
-int trackerinterface :: countItems()
+//public method that kicks off the callback chain
+void trackerinterface :: randomItem()
+{
+    this->countItems();
+}
+
+void trackerinterface :: countItems()
 {
     QSparqlQuery countQuery("SELECT count(?url) AS ?itemCount " \
                             "WHERE { ?song a nmm:MusicPiece . " \
@@ -20,19 +28,18 @@ int trackerinterface :: countItems()
 
     countResult = conn->exec(countQuery);
 
-    countResult->waitForFinished();
-
-    countResult->next();
-
-    return countResult->value(0).toInt();
-
+    QObject::connect(countResult, &QSparqlResult::finished, this, &trackerinterface:: countItemCallback);
 }
 
-void trackerinterface :: randomItem()
+void trackerinterface :: countItemCallback()
 {
-    int count;
-    count = this->countItems();
+    countResult->next();
 
+    emit countItemsComplete(countResult->value(0).toInt());
+}
+
+void trackerinterface::random(int count)
+{
     int randIndex;
 
     randIndex = rand() % count;
@@ -48,9 +55,12 @@ void trackerinterface :: randomItem()
 
     randomResult = conn->exec(urlQuery);
 
-    randomResult->waitForFinished();
+    QObject::connect(randomResult, &QSparqlResult::finished, this, &trackerinterface::randomItemCallback);
 
+}
+
+void trackerinterface :: randomItemCallback()
+{
     randomResult->next();
-
     emit randomItemComplete(randomResult->value(0).toString());
 }

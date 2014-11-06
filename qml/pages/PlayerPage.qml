@@ -117,38 +117,40 @@ Page {
                         id: previous
                         icon.source: "image://theme/icon-m-previous"
                         onClicked: SirenSong.previous()
-                        width: parent.width / 5
+                        width: parent.width / 3
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
+                    /*
                     IconButton {
                         id: seekPrevious
                         icon.source: "image://theme/icon-m-left"
                         width: parent.width / 5
                         anchors.verticalCenter: parent.verticalCenter
-                    }
+                    }*/
 
                     IconButton {
                         id: play
                         icon.source: SirenSong.playbackStatus === 1 ? "image://theme/icon-l-pause" : "image://theme/icon-l-play"
                         onClicked: SirenSong.playbackStatus === 1 ? SirenSong.pause(
                                                                         ) : SirenSong.play()
-                        width: parent.width / 5
+                        width: parent.width / 3
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
+                    /*
                     IconButton {
                         id: seekNext
                         icon.source: "image://theme/icon-m-right"
                         width: parent.width / 5
                         anchors.verticalCenter: parent.verticalCenter
-                    }
+                    } */
 
                     IconButton {
                         id: next
                         icon.source: "image://theme/icon-m-next"
                         onClicked: SirenSong.next()
-                        width: parent.width / 5
+                        width: parent.width / 3
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }

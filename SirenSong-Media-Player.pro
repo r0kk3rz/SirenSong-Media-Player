@@ -33,7 +33,6 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     rpm/SirenSong-Media-Player.yaml \
     translations/*.ts \
     SirenSong-Media-Player.desktop \
-    qml/pages/Main.qml \
     qml/pages/AlphaMenu.qml \
     qml/pages/AlphaMenuGroupView.qml \
     qml/pages/AlphaMenuGroup.qml \
@@ -42,6 +41,7 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/ArtistSelect.qml \
     qml/pages/SearchSelect.qml \
     qml/pages/functions.js \
+    qml/pages/LibraryPage.qml
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps

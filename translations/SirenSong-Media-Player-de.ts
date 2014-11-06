@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de">
+<TS version="2.1" language="de">
 <context>
-    <name>Main</name>
+    <name>ArtistSelect</name>
     <message>
-        <location filename="../qml/pages/Main.qml" line="97"/>
+        <location filename="../qml/pages/ArtistSelect.qml" line="217"/>
+        <source>Add to Play Queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ArtistSelect.qml" line="247"/>
+        <source>Unknown Artist</source>
+        <translation type="unfinished">Unbekannte Künstler</translation>
+    </message>
+</context>
+<context>
+    <name>LibraryPage</name>
+    <message>
+        <location filename="../qml/pages/LibraryPage.qml" line="97"/>
         <source>Sort by Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Main.qml" line="102"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="102"/>
         <source>Sort by Song</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Main.qml" line="129"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="114"/>
         <source>Library</source>
-        <translation>Bibliothek</translation>
+        <translation type="unfinished">Bibliothek</translation>
+    </message>
+</context>
+<context>
+    <name>Main</name>
+    <message>
+        <source>Library</source>
+        <translation type="vanished">Bibliothek</translation>
     </message>
 </context>
 <context>

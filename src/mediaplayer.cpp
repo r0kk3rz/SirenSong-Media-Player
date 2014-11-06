@@ -31,7 +31,10 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
 
     QObject::connect(playlist, &QMediaPlaylist::currentIndexChanged, this, &MediaPlayer::checkPlaylist);
 
-    QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::addToPlaylist);
+    //QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::addToPlaylist);
+
+    //old connection syntax due to overloaded slot method
+    QObject::connect(tracker, SIGNAL(randomItemComplete(QString)), this, SLOT(addToPlaylist(QString)));
 }
 
 void MediaPlayer :: play()
@@ -84,6 +87,14 @@ void MediaPlayer :: stop()
 void MediaPlayer :: addToPlaylist(QString url)
 {
     playlist->addMedia(QUrl(url));
+}
+
+void MediaPlayer :: addToPlaylist(QList<QString> items)
+{
+    foreach (const QString &url, items)
+    {
+        
+    }
 }
 
 void MediaPlayer::clearPlaylist()
@@ -188,16 +199,6 @@ void MediaPlayer :: checkPlaylist(int currentIndex)
             tracker->randomItem();
         }
     }
-
-    //cleanup task so list doesnt get too big
-    //if(playlist->mediaCount() >= 50)
-    //{
-        //make sure we arent removing the current media
-      //  if(playlist->currentIndex() != 0)
-        //{
-          //  playlist->removeMedia(0);
-        //}
-    //}
 }
 
 void MediaPlayer :: metaDataCallback()
