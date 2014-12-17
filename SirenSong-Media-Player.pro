@@ -24,7 +24,8 @@ SOURCES += src/SirenSong-Media-Player.cpp \
     src/playlistmodel.cpp \
     src/mediaplayerdbusadaptor.cpp \
     src/mprisinterface.cpp \
-    src/mediaplaylist.cpp
+    src/mediaplaylist.cpp \
+    src/settings.cpp
 
 OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/cover/CoverPage.qml \
@@ -41,7 +42,10 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/ArtistSelect.qml \
     qml/pages/SearchSelect.qml \
     qml/pages/functions.js \
-    qml/pages/LibraryPage.qml
+    qml/pages/LibraryPage.qml \
+    translations/SirenSong-Media-Player-cz.ts \
+    qml/pages/SettingsPage.qml \
+    translations/SirenSong-Media-Player-fr.ts
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps
@@ -51,7 +55,9 @@ icons.path = /usr/share/icons/hicolor/86x86/apps
 CONFIG += sailfishapp_i18n
 CONFIG += sailfishapp_i18n_unfinished
 TRANSLATIONS += translations/SirenSong-Media-Player-de.ts \
-translations/SirenSong-Media-Player-fi.ts
+translations/SirenSong-Media-Player-fi.ts \
+translations/SirenSong-Media-Player-fr.ts \
+translations/SirenSong-Media-Player-cz.ts
 
 HEADERS += \
     src/mediaplayer.h \
@@ -59,5 +65,6 @@ HEADERS += \
     src/playlistmodel.h \
     src/mediaplayerdbusadaptor.h \
     src/mprisinterface.h \
-    src/mediaplaylist.h
+    src/mediaplaylist.h \
+    src/settings.h
 
