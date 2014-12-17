@@ -5,6 +5,7 @@
 #include "mediaplayerdbusadaptor.h"
 #include "playlistmodel.h"
 #include "mprisinterface.h"
+#include "settings.h"
 #include <QtDBus>
 
 
@@ -28,11 +29,18 @@ int main(int argc, char *argv[])
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
+    QCoreApplication::setApplicationName("SirenSong");
+    QCoreApplication::setOrganizationName("Wayfarer");
+
     QDBusConnection::sessionBus().registerService("org.mpris.MediaPlayer2.sirensong");
 
     qmlRegisterSingletonType<MediaPlayer>("com.wayfarer.sirensong", 1, 0, "SirenSong", player);
 
     qmlRegisterType<PlaylistModel>("com.wayfarer.sirensong", 1, 0, "PlaylistModel");
+
+    Settings settings;
+
+    view->rootContext()->setContextProperty("settings", &settings);
 
     view->setSource(SailfishApp::pathTo("qml/SirenSong-Media-Player.qml"));
     view->show();

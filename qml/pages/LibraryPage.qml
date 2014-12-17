@@ -10,8 +10,7 @@ Page {
 
     property Component songSelectComponent: Qt.createComponent("SongSelect.qml", Component.Asynchronous)
     property Component artistSelectComponent: Qt.createComponent("ArtistSelect.qml", Component.Asynchronous)
-
-
+    property int defaultLibraryMenu: settings.value("defaultLibraryMenu")
 
     Connections {
         target: SirenSong
@@ -94,6 +93,11 @@ Page {
             } */
 
             MenuItem {
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+
+            MenuItem {
                 text: qsTr("Sort by Artist")
                 onClicked: browser.sourceComponent = artistSelectComponent
             }
@@ -118,7 +122,7 @@ Page {
                 id: browser
                 width: parent.width
                 asynchronous: true
-                sourceComponent: songSelectComponent
+                sourceComponent: defaultLibraryMenu == 0? songSelectComponent : artistSelectComponent
                 visible: status == Loader.Ready
             }
         }

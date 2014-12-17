@@ -5,6 +5,7 @@
 #include "trackerinterface.h"
 #include "playlistmodel.h"
 #include "mediaplaylist.h"
+#include <qsettings.h>
 
 class MediaPlayer : public QObject
 {
@@ -69,6 +70,7 @@ private:
     PlaylistModel * plModel;
     bool shuffle;
     bool loop;
+    QSettings _settings;
 
 private slots:
     void setPlaybackStatus( QMediaPlayer::State state );

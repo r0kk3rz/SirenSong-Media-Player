@@ -22,6 +22,9 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     shuffle = false;
     loop = false;
 
+    if(_settings.value("playMode") == 1)
+        toggleLoop();
+
     QObject::connect(player, &QMediaPlayer::stateChanged, this, &MediaPlayer::setPlaybackStatus);
     QObject::connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::setPosition);
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
