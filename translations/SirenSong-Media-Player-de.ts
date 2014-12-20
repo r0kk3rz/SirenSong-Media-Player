@@ -17,17 +17,22 @@
 <context>
     <name>LibraryPage</name>
     <message>
-        <location filename="../qml/pages/LibraryPage.qml" line="97"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="96"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/LibraryPage.qml" line="101"/>
         <source>Sort by Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/LibraryPage.qml" line="102"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="106"/>
         <source>Sort by Song</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/LibraryPage.qml" line="114"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="118"/>
         <source>Library</source>
         <translation type="unfinished">Bibliothek</translation>
     </message>
@@ -59,6 +64,44 @@
     <message>
         <location filename="../qml/pages/PlayerPage.qml" line="31"/>
         <source>Repeat: Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="41"/>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="40"/>
+        <source>Auto Queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="30"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="35"/>
+        <source>Play Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="48"/>
+        <source>Default Library Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="53"/>
+        <source>Sort by Song</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="54"/>
+        <source>Sort by Artist</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

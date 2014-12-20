@@ -26,6 +26,10 @@
         <source>Library</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayerPage</name>
@@ -43,6 +47,37 @@
     </message>
     <message>
         <source>Repeat: Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Library Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by Artist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by Song</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

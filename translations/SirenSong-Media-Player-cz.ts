@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>ArtistSelect</name>
     <message>
@@ -26,6 +26,10 @@
         <source>Library</source>
         <translation>Knihovna</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayerPage</name>
@@ -44,6 +48,37 @@
     <message>
         <source>Repeat: Off</source>
         <translation>Opakovat: Vypnuto</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat</source>
+        <translation>Opakovat</translation>
+    </message>
+    <message>
+        <source>Default Library Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by Song</source>
+        <translation>Třídit dle písně</translation>
+    </message>
+    <message>
+        <source>Sort by Artist</source>
+        <translation>Třídit dle umělce</translation>
     </message>
 </context>
 <context>

@@ -16,11 +16,11 @@
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
-        <translation>Trier par Artiste</translation>
+        <translation>Trier par artiste</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation>Trier par Titre</translation>
+        <translation>Trier par titre</translation>
     </message>
     <message>
         <source>Library</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
 </context>
 <context>
@@ -54,31 +54,31 @@
     <name>SettingsPage</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder</translation>
     </message>
     <message>
         <source>Play Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode de lecture</translation>
     </message>
     <message>
         <source>Auto Queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Aléatoire</translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Répéter</translation>
     </message>
     <message>
         <source>Default Library Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu bibliothèque par défaut</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation type="unfinished">Trier par Titre</translation>
+        <translation>Trier par titre</translation>
     </message>
     <message>
         <source>Sort by Artist</source>
-        <translation type="unfinished">Trier par Artiste</translation>
+        <translation>Trier par artiste</translation>
     </message>
 </context>
 <context>

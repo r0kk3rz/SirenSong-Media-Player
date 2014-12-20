@@ -5,26 +5,30 @@
     <name>ArtistSelect</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation type="unfinished">Lisää Soitettavien Jonoon</translation>
+        <translation>Lisää Soitettavien Jonoon</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Tuntematon Artisti</translation>
+        <translation>Tuntematon Artisti</translation>
     </message>
 </context>
 <context>
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
-        <translation type="unfinished">Artistit</translation>
+        <translation>Artistit</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation type="unfinished">Kaikki Kappaleet</translation>
+        <translation>Kaikki Kappaleet</translation>
     </message>
     <message>
         <source>Library</source>
-        <translation type="unfinished">Kokoelma</translation>
+        <translation>Kokoelma</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -59,6 +63,37 @@
     <message>
         <source>Repeat: Off</source>
         <translation>Toisto: Off</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Library Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by Artist</source>
+        <translation type="unfinished">Artistit</translation>
+    </message>
+    <message>
+        <source>Play Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by Song</source>
+        <translation>Kaikki Kappaleet</translation>
     </message>
 </context>
 <context>
