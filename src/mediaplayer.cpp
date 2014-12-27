@@ -94,10 +94,7 @@ void MediaPlayer :: addToPlaylist(QString url)
 
 void MediaPlayer :: addToPlaylist(QList<QString> items)
 {
-    foreach (const QString &url, items)
-    {
-        
-    }
+    Q_UNUSED(items);
 }
 
 void MediaPlayer::clearPlaylist()

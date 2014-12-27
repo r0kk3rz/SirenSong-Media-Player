@@ -15,7 +15,7 @@ Name:       SirenSong-Media-Player
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    SirenSong Media Player
 Version:    0.4
-Release:    1
+Release:    3
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
@@ -27,7 +27,8 @@ BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Multimedia)
-BuildRequires:  qt5-qtdbus
+BuildRequires:  qt5-qtdbus-devel
+BuildRequires:  libqt5sparql-devel
 BuildRequires:  desktop-file-utils
 
 %description

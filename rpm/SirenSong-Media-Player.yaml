@@ -29,7 +29,8 @@ PkgConfigBR:
 
 # Build dependencies without a pkgconfig setup can be listed here
 PkgBR:
-   - qt5-qtdbus
+   - qt5-qtdbus-devel
+   - libqt5sparql-devel
 
 # Runtime dependencies which are not automatically detected
 Requires:
