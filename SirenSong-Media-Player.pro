@@ -16,7 +16,7 @@ CONFIG += sailfishapp \
             qtsparql
 
 QT += multimedia \
-        dbus
+       dbus
 
 SOURCES += src/SirenSong-Media-Player.cpp \
     src/mediaplayer.cpp \
@@ -45,7 +45,9 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/LibraryPage.qml \
     translations/SirenSong-Media-Player-cz.ts \
     qml/pages/SettingsPage.qml \
-    translations/SirenSong-Media-Player-fr.ts
+    translations/SirenSong-Media-Player-fr.ts \
+    translations/SirenSong-Media-Player-nl.ts \
+    translations/SirenSong-Media-Player-ru.ts
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps
@@ -57,7 +59,9 @@ CONFIG += sailfishapp_i18n_unfinished
 TRANSLATIONS += translations/SirenSong-Media-Player-de.ts \
 translations/SirenSong-Media-Player-fi.ts \
 translations/SirenSong-Media-Player-fr.ts \
-translations/SirenSong-Media-Player-cz.ts
+translations/SirenSong-Media-Player-cz.ts \
+translations/SirenSong-Media-Player-nl.ts \
+translations/SirenSong-Media-Player-ru.ts
 
 HEADERS += \
     src/mediaplayer.h \
