@@ -13,7 +13,6 @@ QVariantMap MediaPlaylist::getMetaData(int index)
 
 void MediaPlaylist::insertMetaData(int startIndex, int endIndex)
 {
-
     for(int index = startIndex; index <= endIndex; index++ )
     {
         QUrl location = this->media(index).canonicalUrl();
@@ -54,4 +53,9 @@ void MediaPlaylist::insertMetaData(int startIndex, int endIndex)
 
         playlistMetaData.insert(index, metaData);
     }
+}
+
+void MediaPlaylist::metaDataCallback()
+{
+    QSparqlResult* result = qobject_cast<QSparqlResult *>(sender());
 }

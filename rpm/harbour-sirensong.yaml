@@ -1,7 +1,7 @@
-Name: SirenSong-Media-Player
+Name: harbour-sirensong
 Summary: SirenSong Media Player
-Version: 0.4
-Release: 4
+Version: 0.5
+Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # http://gitorious.org/meego-developer-tools/spectacle/blobs/master/data/GROUPS
 Group: Qt/Qt
@@ -26,15 +26,18 @@ PkgConfigBR:
   - Qt5Qml
   - Qt5Quick
   - Qt5Multimedia
+  - Qt5DBus
 
 # Build dependencies without a pkgconfig setup can be listed here
 PkgBR:
-   - qt5-qtdbus-devel
    - libqt5sparql-devel
 
 # Runtime dependencies which are not automatically detected
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
+
+Obsoletes:
+  - SirenSong-Media-Player <= 0.4
 
 # All installed files
 Files:

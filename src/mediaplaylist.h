@@ -13,6 +13,7 @@ public slots:
 
 private slots:
     void insertMetaData(int startIndex, int endIndex);
+    void metaDataCallback();
 
 
 private:

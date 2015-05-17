@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import com.wayfarer.sirensong 1.0
+import harbour.sirensong 1.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import "functions.js" as UIFunctions
@@ -20,11 +20,16 @@ Page {
 
             VerticalScrollDecorator {}
 
+            RemorseItem {
+                id:clearRemorse
+                onTriggered: SirenSong.clearPlaylist();
+            }
+
             PullDownMenu {
 
                 MenuItem {
                     text: qsTr("Clear Play Queue")
-                    onClicked: SirenSong.clearPlaylist()
+                    onClicked: clearRemorse.execute(playlistView, qsTr("Clear Playlist"))
                 }
 
                MenuItem {

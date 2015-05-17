@@ -10,7 +10,7 @@
 #   - translation filenames have to be changed
 
 # The name of your application
-TARGET = SirenSong-Media-Player
+TARGET = harbour-sirensong
 
 CONFIG += sailfishapp \
             qtsparql
@@ -18,22 +18,20 @@ CONFIG += sailfishapp \
 QT += multimedia \
        dbus
 
-SOURCES += src/SirenSong-Media-Player.cpp \
+SOURCES += \
     src/mediaplayer.cpp \
     src/trackerinterface.cpp \
     src/playlistmodel.cpp \
     src/mediaplayerdbusadaptor.cpp \
     src/mprisinterface.cpp \
     src/mediaplaylist.cpp \
-    src/settings.cpp
+    src/settings.cpp \
+    src/harbour-sirensong.cpp
 
-OTHER_FILES += qml/SirenSong-Media-Player.qml \
+OTHER_FILES += \
     qml/cover/CoverPage.qml \
-    rpm/SirenSong-Media-Player.changes.in \
-    rpm/SirenSong-Media-Player.spec \
-    rpm/SirenSong-Media-Player.yaml \
     translations/*.ts \
-    SirenSong-Media-Player.desktop \
+    harbour-sirensong.desktop \
     qml/pages/AlphaMenu.qml \
     qml/pages/AlphaMenuGroupView.qml \
     qml/pages/AlphaMenuGroup.qml \
@@ -43,11 +41,15 @@ OTHER_FILES += qml/SirenSong-Media-Player.qml \
     qml/pages/SearchSelect.qml \
     qml/pages/functions.js \
     qml/pages/LibraryPage.qml \
-    translations/SirenSong-Media-Player-cz.ts \
     qml/pages/SettingsPage.qml \
     translations/SirenSong-Media-Player-fr.ts \
     translations/SirenSong-Media-Player-nl.ts \
-    translations/SirenSong-Media-Player-ru.ts
+    translations/SirenSong-Media-Player-ru.ts \
+    translations/harbour-sirensong-cz.ts \
+    qml/harbour-sirensong.qml \
+    rpm/harbour-sirensong.spec \
+    rpm/harbour-sirensong.yaml \
+    rpm/harbour-sirensong.changes.in
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps
@@ -56,12 +58,12 @@ icons.path = /usr/share/icons/hicolor/86x86/apps
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 CONFIG += sailfishapp_i18n_unfinished
-TRANSLATIONS += translations/SirenSong-Media-Player-de.ts \
-translations/SirenSong-Media-Player-fi.ts \
-translations/SirenSong-Media-Player-fr.ts \
-translations/SirenSong-Media-Player-cz.ts \
-translations/SirenSong-Media-Player-nl.ts \
-translations/SirenSong-Media-Player-ru.ts
+TRANSLATIONS += translations/harbour-sirensong-de.ts \
+translations/harbour-sirensong-fi.ts \
+translations/harbour-sirensong-fr.ts \
+translations/harbour-sirensong-cz.ts \
+translations/harbour-sirensong-nl.ts \
+translations/harbour-sirensong-ru.ts
 
 HEADERS += \
     src/mediaplayer.h \

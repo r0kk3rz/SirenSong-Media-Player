@@ -10,7 +10,9 @@
 class MediaPlayer : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(playMode)
     Q_PROPERTY ( int playbackStatus READ playbackStatus NOTIFY playbackStatusChanged )
+    Q_PROPERTY (playMode playbackMode READ playbackMode WRITE setPlaybackMode NOTIFY playbackModeChanged)
     Q_PROPERTY ( qint64 position READ position NOTIFY positionChanged )
     Q_PROPERTY ( qint64 duration READ duration NOTIFY durationChanged )
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
@@ -20,8 +22,17 @@ class MediaPlayer : public QObject
     Q_PROPERTY(bool loopStatus READ loopStatus NOTIFY loopStatusChanged)
 
 public:
+
+  enum playMode
+    {
+        AutoQueue,
+        Repeat,
+        Shuffle
+    };
+
     MediaPlayer(QObject * parent = 0 );
     const int &playbackStatus( );
+    const playMode &playbackMode( );
     const qint64 &position( );
     const qint64 &duration( );
     const QString &title( );
@@ -48,6 +59,7 @@ public slots:
 
 signals:
     void playbackStatusChanged( );
+    void playbackModeChanged(int mode);
     void positionChanged( );
     void durationChanged( );
     void titleChanged( );
@@ -59,6 +71,7 @@ private:
     QMediaPlayer * player;
     MediaPlaylist * playlist;
     int iPlaybackStatus;
+    int iPlaybackMode;
     qint64 iPosition;
     qint64 iDuration;
     QString sCurrentResultsQuery;
@@ -67,13 +80,13 @@ private:
     QString mediaTitle;
     QString mediaArtist;
     int iCurrentIndex;
+    bool autoQueue;
     PlaylistModel * plModel;
-    bool shuffle;
-    bool loop;
     QSettings _settings;
 
 private slots:
     void setPlaybackStatus( QMediaPlayer::State state );
+    void setPlaybackMode(playMode mode);
     void setPosition(qint64 position);
     void setDuration(qint64 duration);
     void setTitle(QString title);

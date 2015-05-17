@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtSparql 1.0
-import com.wayfarer.sirensong 1.0
+import harbour.sirensong 1.0
 import "functions.js" as UIFunctions
 
 Column {
@@ -120,6 +120,11 @@ Column {
                 height: Theme.itemSizeSmall + ((songListItem != null) && (active == true) ? songListItem.implicitHeight : 0)
                 width: albumListView.width
                 property bool active: false
+
+                Behavior on height
+                {
+                    NumberAnimation { duration: 500 }
+                }
 
 
                 ListItem {

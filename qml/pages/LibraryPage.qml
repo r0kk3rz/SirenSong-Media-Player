@@ -1,8 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import com.wayfarer.sirensong 1.0
-import Sailfish.Media 1.0
-import org.nemomobile.policy 1.0
+import harbour.sirensong 1.0
 
 Page {
     id: libraryPage
@@ -30,48 +28,6 @@ Page {
                     libraryPage.playerMenuEnabled = false
                 }
             }
-        }
-    }
-
-    MediaKey {
-        enabled: true
-        key: Qt.Key_MediaTogglePlayPause
-        onPressed: SirenSong.playbackStatus === 1 ? SirenSong.pause() : SirenSong.play()
-    }
-    MediaKey {
-        enabled: true
-        key: Qt.Key_MediaPlay
-        onPressed: SirenSong.play()
-    }
-    MediaKey {
-        enabled: true
-        key: Qt.Key_MediaPause
-        onPressed: SirenSong.pause()
-    }
-    MediaKey {
-        enabled: true
-        key: Qt.Key_MediaStop
-        onPressed: SirenSong.stop()
-    }
-    MediaKey {
-        enabled: true
-        key: Qt.Key_MediaNext
-        onPressed: SirenSong.next()
-    }
-    MediaKey {
-        enabled: true
-        key: Qt.Key_MediaPrevious
-        onPressed: SirenSong.previous()
-    }
-
-    Permissions {
-        enabled: true
-        applicationClass: "player"
-
-        Resource {
-            id: keysResource
-            type: Resource.HeadsetButtons
-            optional: true
         }
     }
 

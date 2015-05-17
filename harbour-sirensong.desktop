@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Icon=SirenSong-Media-Player
-Exec=SirenSong-Media-Player
+Icon=harbour-sirensong
+Exec=harbour-sirensong
 Name=SirenSong
 Name[de]=SirenSong
 Name[fi]=SirenSong

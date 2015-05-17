@@ -1,95 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>ArtistSelect</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Toevoegen aan afspeelwachtrij</translation>
+        <translation>Přidat do seznamu skladeb</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Onbekende artiest</translation>
+        <translation>Neznámý umělec</translation>
     </message>
 </context>
 <context>
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
-        <translation>Sorteren op artiest</translation>
+        <translation>Třídit dle umělce</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation>Sorteren op nummer</translation>
+        <translation>Třídit dle písně</translation>
     </message>
     <message>
         <source>Library</source>
-        <translation>Bibliotheek</translation>
+        <translation>Knihovna</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Instellingen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PlayerPage</name>
     <message>
         <source>Play Queue</source>
-        <translation>Afspeelwachtrij</translation>
+        <translation>Přehrát seznam skladeb</translation>
     </message>
     <message>
         <source>Clear Play Queue</source>
-        <translation>Afspeelwachtrij wissen</translation>
+        <translation>Vyprázdnit seznam skladeb</translation>
     </message>
     <message>
         <source>Repeat: On</source>
-        <translation>Herhalen: Aan</translation>
+        <translation>Opakovat: Zapnuto</translation>
     </message>
     <message>
         <source>Repeat: Off</source>
-        <translation>Herhalen: Uit</translation>
+        <translation>Opakovat: Vypnuto</translation>
+    </message>
+    <message>
+        <source>Clear Playlist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>Save</source>
-        <translation>Opslaan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Play Mode</source>
-        <translation>Afspeelmodus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Auto Queue</source>
-        <translation>Automatisch in wachtrij zetten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation>Herhalen</translation>
+        <translation>Opakovat</translation>
     </message>
     <message>
         <source>Default Library Menu</source>
-        <translation>Standaard bibliotheekmenu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation>Sorteren op nummer</translation>
+        <translation>Třídit dle písně</translation>
     </message>
     <message>
         <source>Sort by Artist</source>
-        <translation>Sorteren op artiest</translation>
+        <translation>Třídit dle umělce</translation>
+    </message>
+    <message>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SongSelect</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Toevoegen aan afspeelwachtrij</translation>
+        <translation>Přidat do seznamu skladeb</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Onbekende artiest</translation>
+        <translation>Neznámý umělec</translation>
     </message>
 </context>
 </TS>

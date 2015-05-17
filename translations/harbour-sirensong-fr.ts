@@ -1,95 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.1" language="fr">
 <context>
     <name>ArtistSelect</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Přidat do seznamu skladeb</translation>
+        <translation>Ajouter à la liste de lecture</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Neznámý umělec</translation>
+        <translation>Artiste inconnu</translation>
     </message>
 </context>
 <context>
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
-        <translation>Třídit dle umělce</translation>
+        <translation>Trier par artiste</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation>Třídit dle písně</translation>
+        <translation>Trier par titre</translation>
     </message>
     <message>
         <source>Library</source>
-        <translation>Knihovna</translation>
+        <translation>Bibliothèque</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
 </context>
 <context>
     <name>PlayerPage</name>
     <message>
         <source>Play Queue</source>
-        <translation>Přehrát seznam skladeb</translation>
+        <translation>Liste de lecture</translation>
     </message>
     <message>
         <source>Clear Play Queue</source>
-        <translation>Vyprázdnit seznam skladeb</translation>
+        <translation>Vider la liste de lecture</translation>
     </message>
     <message>
         <source>Repeat: On</source>
-        <translation>Opakovat: Zapnuto</translation>
+        <translation>Répéter: On</translation>
     </message>
     <message>
         <source>Repeat: Off</source>
-        <translation>Opakovat: Vypnuto</translation>
+        <translation>Répéter: Off</translation>
+    </message>
+    <message>
+        <source>Clear Playlist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder</translation>
     </message>
     <message>
         <source>Play Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode de lecture</translation>
     </message>
     <message>
         <source>Auto Queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Aléatoire</translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation>Opakovat</translation>
+        <translation>Répéter</translation>
     </message>
     <message>
         <source>Default Library Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu bibliothèque par défaut</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation>Třídit dle písně</translation>
+        <translation>Trier par titre</translation>
     </message>
     <message>
         <source>Sort by Artist</source>
-        <translation>Třídit dle umělce</translation>
+        <translation>Trier par artiste</translation>
+    </message>
+    <message>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SongSelect</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Přidat do seznamu skladeb</translation>
+        <translation>Ajouter à la liste de lecture</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Neznámý umělec</translation>
+        <translation>Artiste inconnu</translation>
     </message>
 </context>
 </TS>

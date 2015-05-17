@@ -1,13 +1,13 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import com.wayfarer.sirensong 1.0
+import harbour.sirensong 1.0
 
 CoverBackground {
 
     Image {
         y: 20
         anchors.horizontalCenter: parent.horizontalCenter
-        source: "SirenSong-Media-Player.png"
+        source: "harbour-sirensong.png"
     }
 
     Column {

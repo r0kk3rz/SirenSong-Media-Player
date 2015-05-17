@@ -34,15 +34,15 @@ int main(int argc, char *argv[])
 
     QDBusConnection::sessionBus().registerService("org.mpris.MediaPlayer2.sirensong");
 
-    qmlRegisterSingletonType<MediaPlayer>("com.wayfarer.sirensong", 1, 0, "SirenSong", player);
+    qmlRegisterSingletonType<MediaPlayer>("harbour.sirensong", 1, 0, "SirenSong", player);
 
-    qmlRegisterType<PlaylistModel>("com.wayfarer.sirensong", 1, 0, "PlaylistModel");
+    qmlRegisterType<PlaylistModel>("harbour.sirensong", 1, 0, "PlaylistModel");
 
     Settings settings;
 
     view->rootContext()->setContextProperty("settings", &settings);
 
-    view->setSource(SailfishApp::pathTo("qml/SirenSong-Media-Player.qml"));
+    view->setSource(SailfishApp::pathTo("qml/harbour-sirensong.qml"));
     view->show();
 
     return app->exec();

@@ -100,11 +100,11 @@ Grid {
         var maxListItemsOnScreen = screen.height / Theme.itemSizeSmall
         if (listCount < maxListItemsOnScreen) {
             var minDuration = 150
-            var maxDuration = 250
+            var maxDuration = 1500
             return minDuration + ((maxDuration - minDuration) * (listCount / maxListItemsOnScreen))
         }
         // use default animation duration
-        return 250
+        return 1500
     }
 
     function _activate(group) {

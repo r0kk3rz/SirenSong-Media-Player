@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import com.wayfarer.sirensong 1.0
+import harbour.sirensong 1.0
 
 
 Dialog {
@@ -12,12 +12,7 @@ Dialog {
         console.log(settings.value("playMode"))
         console.log(settings.value("defaultLibraryMenu"))
 
-        if((SirenSong.loopStatus == false) && (settings.value("playMode") == 1))
-            SirenSong.toggleLoop()
-
-        if(SirenSong.loopStatus == true && settings.value("playMode") == 0)
-            SirenSong.toggleLoop()
-
+        SirenSong.playbackMode = settings.value("playMode");
     }
 
         VerticalScrollDecorator {}
@@ -39,6 +34,7 @@ Dialog {
                 menu: ContextMenu {
                     MenuItem { text: qsTr("Auto Queue") }
                     MenuItem { text: qsTr("Repeat") }
+                    MenuItem { text: qsTr("Shuffle") }
                 }
 
             }
