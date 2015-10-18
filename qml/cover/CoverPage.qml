@@ -7,7 +7,7 @@ CoverBackground {
     Image {
         y: 20
         anchors.horizontalCenter: parent.horizontalCenter
-        source: "harbour-sirensong.png"
+        source: Qt.resolvedUrl("SirenSong-Media-Player.png");
     }
 
     Column {
