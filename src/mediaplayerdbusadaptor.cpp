@@ -17,7 +17,7 @@ mediaplayerDbusAdaptor::mediaplayerDbusAdaptor(MediaPlayer * mediaplayer) : QDBu
     asMetadata = QVariantMap();
 
     QObject::connect(mp, &MediaPlayer::playbackStatusChanged, this, &mediaplayerDbusAdaptor::playbackStatusChanged);
-    QObject::connect(mp, &MediaPlayer::artistChanged, this, &mediaplayerDbusAdaptor::metaDataChanged);
+    QObject::connect(mp, &MediaPlayer::currentIndexChanged, this, &mediaplayerDbusAdaptor::metaDataChanged);
 
     dbusVolume = new QDBusInterface("com.Meego.MainVolume2", "/com/meego/mainvolume2", "com.Meego.MainVolume2" );
 

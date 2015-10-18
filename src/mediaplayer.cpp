@@ -28,11 +28,9 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     QObject::connect(player, &QMediaPlayer::durationChanged, this, &MediaPlayer::setDuration);
 
     //Old connection syntax due to overloaded metaDataChanged()
-    QObject::connect(player, SIGNAL(metaDataChanged()), this, SLOT(metaDataCallback()));
+    //QObject::connect(player, SIGNAL(metaDataChanged()), this, SLOT(metaDataCallback()));
 
     QObject::connect(playlist, &QMediaPlaylist::currentIndexChanged, this, &MediaPlayer::checkPlaylist);
-
-    //QObject::connect(tracker, &trackerinterface::randomItemComplete, this, &MediaPlayer::addToPlaylist);
 
     //old connection syntax due to overloaded slot method
     QObject::connect(tracker, SIGNAL(randomItemComplete(QString)), this, SLOT(addToPlaylist(QString)));
@@ -212,6 +210,10 @@ void MediaPlayer :: setPosition(qint64 position)
 void MediaPlayer :: checkPlaylist(int currentIndex)
 {
     iCurrentIndex = currentIndex;
+
+    setArtist(plModel->data(plModel->index(currentIndex), plModel->Artist).toString());
+    setTitle(plModel->data(plModel->index(currentIndex), plModel->Title).toString());
+
     emit currentIndexChanged();
 
     if(autoQueue)
