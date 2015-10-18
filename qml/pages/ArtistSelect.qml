@@ -121,12 +121,6 @@ Column {
                 width: albumListView.width
                 property bool active: false
 
-                Behavior on height
-                {
-                    NumberAnimation { duration: 500 }
-                }
-
-
                 ListItem {
                 width: parent.width
                 height: Theme.itemSizeSmall
@@ -212,6 +206,11 @@ Column {
             width: root.width
 
             property bool active: false
+
+            Behavior on implicitHeight
+            {
+                NumberAnimation { duration: 200 }
+            }
 
             delegate: ListItem {
                 width: parent.width
