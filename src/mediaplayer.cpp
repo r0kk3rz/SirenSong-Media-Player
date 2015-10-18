@@ -13,7 +13,7 @@ MediaPlayer::MediaPlayer( QObject * parent ) : QObject ( parent )
     iPlaybackStatus = 0;
     iPlaybackMode = 2;
     iPosition = 0;
-    iDuration = 0;
+    iDuration = 1;
     iCurrentIndex = 0;
     sCurrentResultsQuery = "";
     mediaArtist = "";
@@ -112,7 +112,7 @@ void MediaPlayer::toggleLoop()
     }
 }
 
-const bool &MediaPlayer :: loopStatus()
+bool MediaPlayer :: loopStatus()
 {
     if(playlist->playbackMode() == QMediaPlaylist::Loop)
         return true;
@@ -120,15 +120,15 @@ const bool &MediaPlayer :: loopStatus()
         return false;
 }
 
-const int &MediaPlayer :: playbackStatus ( ) {
+int &MediaPlayer :: playbackStatus ( ) {
     return iPlaybackStatus;
 }
 
-const MediaPlayer::playMode &MediaPlayer :: playbackMode ( ) {
+MediaPlayer::playMode MediaPlayer :: playbackMode ( ) {
     return (playMode)iPlaybackMode;
 }
 
-const int &MediaPlayer::currentIndex() {
+int &MediaPlayer::currentIndex() {
     return iCurrentIndex;
 }
 
@@ -163,7 +163,7 @@ void MediaPlayer :: setPlaybackMode(playMode mode)
     emit playbackModeChanged(iPlaybackMode);
 }
 
-const QString &MediaPlayer :: title ( ) {
+QString &MediaPlayer :: title ( ) {
     return mediaTitle;
 }
 
@@ -173,7 +173,7 @@ void MediaPlayer :: setTitle(QString title)
     emit titleChanged();
 }
 
-const QString &MediaPlayer :: artist ( ) {
+QString &MediaPlayer :: artist ( ) {
     return mediaArtist;
 }
 
@@ -183,7 +183,7 @@ void MediaPlayer :: setArtist(QString artist)
     emit artistChanged();
 }
 
-const qint64 &MediaPlayer :: duration ( ) {
+qint64 &MediaPlayer :: duration ( ) {
     return iDuration;
 }
 void MediaPlayer :: setDuration(qint64 duration)
@@ -192,7 +192,7 @@ void MediaPlayer :: setDuration(qint64 duration)
     emit durationChanged();
 }
 
-const qint64 &MediaPlayer :: position( ) {
+qint64 &MediaPlayer :: position( ) {
     return iPosition;
 }
 

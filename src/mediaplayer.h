@@ -31,14 +31,14 @@ public:
     };
 
     MediaPlayer(QObject * parent = 0 );
-    const int &playbackStatus( );
-    const playMode &playbackMode( );
-    const qint64 &position( );
-    const qint64 &duration( );
-    const QString &title( );
-    const QString &artist( );
-    const int &currentIndex( );
-    const bool &loopStatus();
+    int &playbackStatus( );
+    playMode playbackMode( );
+    qint64 &position( );
+    qint64 &duration( );
+    QString &title( );
+    QString &artist( );
+    int &currentIndex( );
+    bool loopStatus();
     PlaylistModel* &playlistModel();
 
 
