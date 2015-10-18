@@ -10,8 +10,33 @@ Page {
     property Component artistSelectComponent: Qt.createComponent("ArtistSelect.qml", Component.Asynchronous)
     property int defaultLibraryMenu: settings.value("defaultLibraryMenu")
 
+    property string launchArgs: Qt.resolvedUrl(Qt.application.arguments[1]);
+    property bool once: false;
+
+    onLaunchArgsChanged:
+    {
+        if(once == false)
+        {
+            if(launchArgs != "")
+            {
+                launchTimer.start();
+            }
+            once = true;
+        }
+    }
+
+    Timer {
+        id: launchTimer
+        running: false
+        onTriggered: SirenSong.play(launchArgs);
+        triggeredOnStart: false
+        interval: 1000
+        repeat: false
+    }
+
     Connections {
         target: SirenSong
+
         onPlaybackStatusChanged: {
 
             if (SirenSong.playbackStatus === 1) {
