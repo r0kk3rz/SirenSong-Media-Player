@@ -5,6 +5,8 @@ import QtMultimedia 5.0
 import "functions.js" as UIFunctions
 
 Page {
+
+    allowedOrientations: Orientation.All
     Drawer {
 
         open: true

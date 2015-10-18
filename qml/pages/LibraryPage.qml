@@ -13,6 +13,8 @@ Page {
     property string launchArgs: Qt.resolvedUrl(Qt.application.arguments[1]);
     property bool once: false;
 
+    allowedOrientations: Orientation.All
+
     onLaunchArgsChanged:
     {
         if(once == false)

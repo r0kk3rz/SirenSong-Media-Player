@@ -5,4 +5,5 @@ ApplicationWindow {
     id: appWindow
     cover: Qt.resolvedUrl("qml/cover/CoverPage.qml")
     initialPage: Qt.resolvedUrl("LibraryPage.qml")
+    allowedOrientations: Orientation.All
 }
