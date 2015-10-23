@@ -25,7 +25,34 @@ static QObject *player(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 int main(int argc, char *argv[])
 {
+    QStringList serviceList = QDBusConnection::sessionBus().interface()->registeredServiceNames().value();
+
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+
+    if(serviceList.contains("org.mpris.MediaPlayer2.sirensong"))
+    {
+        qDebug() << "found existing process";
+
+        if(app->arguments().count() > 1)
+        {
+            QUrl loadMedia = QUrl(app->arguments().at(1));
+
+            if(loadMedia.isValid())
+            {
+                qDebug() << "Sending Open Uri to existing processs";
+                qDebug() << "Open" << app->arguments().at(1);
+
+                QDBusMessage m = QDBusMessage::createMethodCall("org.mpris.MediaPlayer2.sirensong",
+                        "/org/mpris/MediaPlayer2",
+                        "org.mpris.MediaPlayer2.Player",
+                         "OpenUri");
+                m << app->arguments().at(1);
+                QDBusConnection::sessionBus().send(m);
+            }
+        }
+
+        exit(0);
+    }
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 

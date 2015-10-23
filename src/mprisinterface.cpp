@@ -4,7 +4,7 @@ mprisinterface::mprisinterface(MediaPlayer * mediaplayer) : QDBusAbstractAdaptor
 {
     canTrue = true;
     canFalse = false;
-    identity = "SirenSong";
+    identity = "harbour-sirensong";
 
 }
 

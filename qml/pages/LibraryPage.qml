@@ -21,6 +21,7 @@ Page {
         {
             if(launchArgs != "")
             {
+                console.log("QML: Open URL: " + launchArgs);
                 launchTimer.start();
             }
             once = true;
@@ -32,7 +33,7 @@ Page {
         running: false
         onTriggered: SirenSong.play(launchArgs);
         triggeredOnStart: false
-        interval: 1000
+        interval: 500
         repeat: false
     }
 

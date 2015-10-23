@@ -49,8 +49,11 @@ void mediaplayerDbusAdaptor::Previous()
 }
 
 void mediaplayerDbusAdaptor::OpenUri(QString uri)
-{
-    mp->play(uri);
+{   
+    qDebug() << "Raw URL: " << uri;
+    QUrl toLoad = QUrl(uri);
+    qDebug() << "dbus open " << toLoad.toString();
+    mp->play(QString("file://").append(toLoad.toEncoded()));
 }
 
 void mediaplayerDbusAdaptor::PlayPause()
