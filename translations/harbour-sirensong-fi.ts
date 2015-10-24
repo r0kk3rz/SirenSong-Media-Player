@@ -32,21 +32,6 @@
     </message>
 </context>
 <context>
-    <name>Main</name>
-    <message>
-        <source>Library</source>
-        <translation type="vanished">Kokoelma</translation>
-    </message>
-    <message>
-        <source>Sort by Artist</source>
-        <translation type="vanished">Artistit</translation>
-    </message>
-    <message>
-        <source>Sort by Song</source>
-        <translation type="vanished">Kaikki Kappaleet</translation>
-    </message>
-</context>
-<context>
     <name>PlayerPage</name>
     <message>
         <source>Play Queue</source>
