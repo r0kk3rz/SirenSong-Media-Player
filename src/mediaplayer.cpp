@@ -209,42 +209,29 @@ void MediaPlayer :: setPosition(qint64 position)
 
 void MediaPlayer :: checkPlaylist(int currentIndex)
 {
-    iCurrentIndex = currentIndex;
-
-    setArtist(plModel->data(plModel->index(currentIndex), plModel->Artist).toString());
-    setTitle(plModel->data(plModel->index(currentIndex), plModel->Title).toString());
-
-    emit currentIndexChanged();
-
-    if(autoQueue)
+    // this fires on startup with index -1 for some reason
+    if(currentIndex != -1)
     {
-        //check if current item is the last in list
-        if(currentIndex == (playlist->mediaCount() -1))
+        setArtist(plModel->data(plModel->index(currentIndex), plModel->Artist).toString());
+        setTitle(plModel->data(plModel->index(currentIndex), plModel->Title).toString());
+
+        qDebug() << "currIndex: " << currentIndex;
+
+        emit currentIndexChanged();
+
+        if(autoQueue)
         {
-            //insert random item next
-            tracker->randomItem();
+            //check if current item is the last in list
+            if(currentIndex == (playlist->mediaCount() -1))
+            {
+                //insert random item next
+                tracker->randomItem();
+            }
         }
     }
 }
 
 void MediaPlayer :: metaDataCallback()
 {
-
-    if(player->metaData(QMediaMetaData::Title).toString() != "")
-    {
-        setTitle(player->metaData(QMediaMetaData::Title).toString());
-    }
-    else
-    {
-        setTitle(QFileInfo(player->currentMedia().canonicalUrl().toString()).fileName());
-    }
-
-    if(player->metaData(QMediaMetaData::AlbumArtist).toString() != "")
-    {
-        setArtist(player->metaData(QMediaMetaData::AlbumArtist).toString());
-    }
-    else
-    {
-        setArtist("Unknown Artist");
-    }
+    qDebug() << "MetaData: Average Level: " <<  player->metaData(QMediaMetaData::AverageLevel);
 }
