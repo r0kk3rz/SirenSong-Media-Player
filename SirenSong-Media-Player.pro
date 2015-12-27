@@ -32,21 +32,8 @@ OTHER_FILES += \
     qml/cover/CoverPage.qml \
     translations/*.ts \
     harbour-sirensong.desktop \
-    qml/pages/AlphaMenu.qml \
-    qml/pages/AlphaMenuGroupView.qml \
-    qml/pages/AlphaMenuGroup.qml \
-    qml/pages/PlayerPage.qml \
-    qml/pages/SongSelect.qml \
-    qml/pages/ArtistSelect.qml \
-    qml/pages/SearchSelect.qml \
+    qml/pages/*.qml \
     qml/pages/functions.js \
-    qml/pages/LibraryPage.qml \
-    qml/pages/SettingsPage.qml \
-    translations/SirenSong-Media-Player-fr.ts \
-    translations/SirenSong-Media-Player-nl.ts \
-    translations/SirenSong-Media-Player-ru.ts \
-    translations/harbour-sirensong-cz.ts \
-    qml/harbour-sirensong.qml \
     rpm/harbour-sirensong.spec \
     rpm/harbour-sirensong.yaml \
     rpm/harbour-sirensong.changes.in
@@ -58,12 +45,7 @@ icons.path = /usr/share/icons/hicolor/86x86/apps
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 CONFIG += sailfishapp_i18n_unfinished
-TRANSLATIONS += translations/harbour-sirensong-de.ts \
-translations/harbour-sirensong-fi.ts \
-translations/harbour-sirensong-fr.ts \
-translations/harbour-sirensong-cz.ts \
-translations/harbour-sirensong-nl.ts \
-translations/harbour-sirensong-ru.ts
+TRANSLATIONS += translations/*.ts
 
 HEADERS += \
     src/mediaplayer.h \
