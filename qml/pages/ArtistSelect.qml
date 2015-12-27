@@ -10,6 +10,7 @@ Column {
     property Item _currActiveGroup
     property Item _currActiveAlbum
 
+
     //Top Level Menu
     Repeater {
         model: queryModel
@@ -25,6 +26,7 @@ Column {
             property alias containsMouse: mouseArea.containsMouse
             property bool highlighted: pressed && containsMouse || artistItem.active
             property int baseHeight: Theme.itemSizeSmall
+            property string selectedArtist
 
             MouseArea {
                 id: mouseArea
@@ -57,6 +59,7 @@ Column {
                     groupResultsList = albumListComponent.createObject(artistItem);
                     groupResultsList.open(artistName);
                     artistItem.active = true;
+                    artistItem.selectedArtist = artistName;
 
                     root._currActiveGroup = artistItem;
                 }
@@ -70,6 +73,7 @@ Column {
             {
                 artistItem.active = false;
                 artistItem.groupResultsList.close();
+                artistItem.selectedArtist = "";
             }
         }
     }
@@ -294,10 +298,12 @@ Column {
                             "?song nmm:musicAlbum ?album . " +
                             "?album nmm:albumArtist ?albumArtist . " +
                             "?album nmm:albumTitle ?albumTitle . " +
-                            "?albumArtist nmm:artistName ?artist " +
-                            "FILTER (?albumTitle =  '"+ filterText +"') "+
+                            "?song nmm:performer ?aName . "+
+                            "?aName nmm:artistName ?artist "+
+                            "FILTER (?albumTitle =  '"+ filterText +"' &&
+                                    ?artist = '"+ _currActiveGroup.selectedArtist +"') "+
                             "} " +
-                            "ORDER BY ASC(?tracknumber)"
+                            "GROUP BY ?song ORDER BY ASC(?tracknumber)"
                 }
             }
         }
