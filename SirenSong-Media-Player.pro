@@ -30,13 +30,19 @@ SOURCES += \
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
-    translations/*.ts \
     harbour-sirensong.desktop \
     qml/pages/*.qml \
     qml/pages/functions.js \
     rpm/harbour-sirensong.spec \
     rpm/harbour-sirensong.yaml \
-    rpm/harbour-sirensong.changes.in
+    rpm/harbour-sirensong.changes.in \
+    translations/harbour-sirensong-de.ts \
+    translations/harbour-sirensong-fi.ts \
+    translations/harbour-sirensong-fr.ts \
+    translations/harbour-sirensong-cz.ts \
+    translations/harbour-sirensong-nl.ts \
+    translations/harbour-sirensong-ru.ts \
+    translations/harbour-sirensong-sv.ts
 
 icons.files = $${TARGET}.png
 icons.path = /usr/share/icons/hicolor/86x86/apps
@@ -45,7 +51,13 @@ icons.path = /usr/share/icons/hicolor/86x86/apps
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 CONFIG += sailfishapp_i18n_unfinished
-TRANSLATIONS += translations/*.ts
+TRANSLATIONS += translations/harbour-sirensong-de.ts \
+    translations/harbour-sirensong-fi.ts \
+    translations/harbour-sirensong-fr.ts \
+    translations/harbour-sirensong-cz.ts \
+    translations/harbour-sirensong-nl.ts \
+    translations/harbour-sirensong-ru.ts \
+    translations/harbour-sirensong-sv.ts
 
 HEADERS += \
     src/mediaplayer.h \
