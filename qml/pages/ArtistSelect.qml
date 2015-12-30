@@ -104,90 +104,21 @@ Column {
     Component {
         id: albumListComponent
 
-        Column {
-            id: albumListView
-            height: (albumListQueryModel.count * Theme.itemSizeSmall) + submenuHeight
-
-            x: -parent.x
-            y: Theme.itemSizeSmall
+        TieredMenu {
             width: root.width
-
-            property Item songListItem
-            property int submenuHeight: (songListItem != null) && (songListItem.active == true) ? songListItem.implicitHeight : 0
-
-            Repeater {
-                id: albumRepeater
-                model: albumListQueryModel
-
-                Item {
-                id: albumItem
-                height: Theme.itemSizeSmall + ((songListItem != null) && (active == true) ? songListItem.implicitHeight : 0)
-                width: albumListView.width
-                property bool active: false
-
-                ListItem {
-                width: parent.width
-                height: Theme.itemSizeSmall
-                onClicked: activate(parent)
-                Label { x:60; text: albumTitle; anchors.verticalCenter: parent.verticalCenter }
-                }
-
-                function activate(albumItem)
-                {
-                    if(!albumItem.active)
-                    {
-                        if(root._currActiveAlbum != null)
-                        {
-                            deactivate(root._currActiveAlbum)
-                        }
-
-                        songListItem = songListComponent.createObject(albumItem);
-                        albumItem.active = true
-                        songListItem.open(albumTitle)
-
-                        root._currActiveAlbum = albumItem
-                    }
-                    else
-                    {
-                        deactivate(albumItem)
-                    }
-                }
-
-                function deactivate(albumItem)
-                {
-                    albumItem.active = false;
-
-                    if(albumListView.songListItem.active == true)
-                        albumListView.songListItem.close();
-                }
-            }
-            }
-
-            function open(artistName)
-            {
-                albumListQueryModel.filter(artistName)
-                albumRepeater.model = albumListQueryModel
-                state = "active";
-            }
-
-            function close()
-            {
-                state = "";
-                albumRepeater.model = emptyModel;
-            }
-
-            SparqlListModel {
+            subListComponent: songListComponent
+            activeParentItem: root._currActiveAlbum
+            menuListQueryModel: SparqlListModel {
                 id: albumListQueryModel
                 connection: SparqlConnection {
-                    id: sparqlConnection
                     driver: "QTRACKER_DIRECT"
                 }
 
                 function filter(filterText)
                 {
-                    albumListQueryModel.query = "SELECT ?albumTitle " + "WHERE { ?album a nmm:MusicAlbum . " +
+                    albumListQueryModel.query = "SELECT ?menuText " + "WHERE { ?album a nmm:MusicAlbum . " +
                             "?album nmm:albumArtist ?albumArtist . " +
-                            "?album nmm:albumTitle ?albumTitle . " +
+                            "?album nmm:albumTitle ?menuText. " +
                             "?albumArtist nmm:artistName ?artistName " +
                             "FILTER (?artistName =  '"+ filterText +"') "+
                             "} "
@@ -216,48 +147,9 @@ Column {
                 NumberAnimation { duration: 200 }
             }
 
-            delegate: ListItem {
+            delegate: SongItem {
                 width: parent.width
                 id: songList
-
-                menu: ContextMenu {
-                    MenuItem {
-                        text: qsTr("Add to Play Queue")
-                        onClicked: SirenSong.addToPlaylist(url)
-                    }
-                }
-
-                onClicked: {
-                    SirenSong.play(url)
-                    if (libraryPage.forwardNavigation) {
-                        pageStack.navigateForward(PageStackAction.Animated)
-                    }
-                }
-
-                Row {
-                    spacing: 20
-                    x: 10
-
-                    Label {
-                        text: UIFunctions.durationString(length)
-                        height: Theme.itemSizeHuge
-                        font.pixelSize: Theme.fontSizeExtraLarge
-                        color: Theme.secondaryColor
-                    }
-
-                    Column {
-                        Label {
-                            text: title != null ? title : filename
-                            font.pixelSize: Theme.fontSizeMedium
-                            color: Theme.primaryColor
-                        }
-                        Label {
-                            text: artist != null ? artist : qsTr("Unknown Artist")
-                            font.pixelSize: Theme.fontSizeExtraSmall
-                            color: Theme.secondaryColor
-                        }
-                    }
-                }
             }
 
             function open(albumTitle)

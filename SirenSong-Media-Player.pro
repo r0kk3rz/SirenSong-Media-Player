@@ -68,3 +68,7 @@ HEADERS += \
     src/mediaplaylist.h \
     src/settings.h
 
+DISTFILES += \
+    qml/pages/SongItem.qml \
+    qml/pages/TieredMenu.qml
+

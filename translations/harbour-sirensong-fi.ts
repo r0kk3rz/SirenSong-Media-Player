@@ -2,17 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fi">
 <context>
-    <name>ArtistSelect</name>
-    <message>
-        <source>Add to Play Queue</source>
-        <translation>Lisää Soitettavien Jonoon</translation>
-    </message>
-    <message>
-        <source>Unknown Artist</source>
-        <translation>Tuntematon Artisti</translation>
-    </message>
-</context>
-<context>
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
@@ -28,6 +17,10 @@
     </message>
     <message>
         <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -90,14 +83,14 @@
     </message>
 </context>
 <context>
-    <name>SongSelect</name>
+    <name>SongItem</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Lisää Soitettavien Jonoon</translation>
+        <translation type="unfinished">Lisää Soitettavien Jonoon</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Tuntematon Artisti</translation>
+        <translation type="unfinished">Tuntematon Artisti</translation>
     </message>
 </context>
 </TS>

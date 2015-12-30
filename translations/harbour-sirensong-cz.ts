@@ -2,17 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="cs_CZ">
 <context>
-    <name>ArtistSelect</name>
-    <message>
-        <source>Add to Play Queue</source>
-        <translation>Přidat do seznamu skladeb</translation>
-    </message>
-    <message>
-        <source>Unknown Artist</source>
-        <translation>Neznámý umělec</translation>
-    </message>
-</context>
-<context>
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
@@ -28,6 +17,10 @@
     </message>
     <message>
         <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -90,14 +83,14 @@
     </message>
 </context>
 <context>
-    <name>SongSelect</name>
+    <name>SongItem</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Přidat do seznamu skladeb</translation>
+        <translation type="unfinished">Přidat do seznamu skladeb</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Neznámý umělec</translation>
+        <translation type="unfinished">Neznámý umělec</translation>
     </message>
 </context>
 </TS>

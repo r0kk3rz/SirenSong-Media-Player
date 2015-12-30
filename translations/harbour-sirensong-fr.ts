@@ -2,17 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr">
 <context>
-    <name>ArtistSelect</name>
-    <message>
-        <source>Add to Play Queue</source>
-        <translation>Ajouter à la liste de lecture</translation>
-    </message>
-    <message>
-        <source>Unknown Artist</source>
-        <translation>Artiste inconnu</translation>
-    </message>
-</context>
-<context>
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
@@ -29,6 +18,10 @@
     <message>
         <source>Settings</source>
         <translation>Paramètres</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -90,14 +83,14 @@
     </message>
 </context>
 <context>
-    <name>SongSelect</name>
+    <name>SongItem</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Ajouter à la liste de lecture</translation>
+        <translation type="unfinished">Ajouter à la liste de lecture</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Artiste inconnu</translation>
+        <translation type="unfinished">Artiste inconnu</translation>
     </message>
 </context>
 </TS>

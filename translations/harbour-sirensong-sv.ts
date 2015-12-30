@@ -1,15 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
-<context>
-    <name>ArtistSelect</name>
-    <message>
-        <source>Add to Play Queue</source>
-        <translation>Lägg till i uppspelningskön</translation>
-    </message>
-    <message>
-        <source>Unknown Artist</source>
-        <translation>Okänd artist</translation>
-    </message>
-</context>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sv">
 <context>
     <name>LibraryPage</name>
     <message>
@@ -27,6 +18,10 @@
     <message>
         <source>Settings</source>
         <translation>Inställningar</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -88,14 +83,14 @@
     </message>
 </context>
 <context>
-    <name>SongSelect</name>
+    <name>SongItem</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation>Lägg till i uppspelningskön</translation>
+        <translation type="unfinished">Lägg till i uppspelningskön</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation>Okänd artist</translation>
+        <translation type="unfinished">Okänd artist</translation>
     </message>
 </context>
 </TS>

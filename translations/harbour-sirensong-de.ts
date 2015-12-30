@@ -2,37 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de">
 <context>
-    <name>ArtistSelect</name>
+    <name>LibraryPage</name>
     <message>
-        <location filename="../qml/pages/ArtistSelect.qml" line="221"/>
-        <source>Add to Play Queue</source>
+        <location filename="../qml/pages/LibraryPage.qml" line="76"/>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ArtistSelect.qml" line="251"/>
-        <source>Unknown Artist</source>
-        <translation type="unfinished">Unbekannte Künstler</translation>
-    </message>
-</context>
-<context>
-    <name>LibraryPage</name>
-    <message>
-        <location filename="../qml/pages/LibraryPage.qml" line="80"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="81"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/LibraryPage.qml" line="85"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="86"/>
         <source>Sort by Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/LibraryPage.qml" line="90"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="91"/>
         <source>Sort by Song</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/LibraryPage.qml" line="102"/>
+        <location filename="../qml/pages/LibraryPage.qml" line="103"/>
         <source>Library</source>
         <translation type="unfinished">Bibliothek</translation>
     </message>
@@ -109,16 +101,16 @@
     </message>
 </context>
 <context>
-    <name>SongSelect</name>
+    <name>SongItem</name>
     <message>
-        <location filename="../qml/pages/SongSelect.qml" line="27"/>
+        <location filename="../qml/pages/SongItem.qml" line="9"/>
         <source>Add to Play Queue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SongSelect.qml" line="57"/>
+        <location filename="../qml/pages/SongItem.qml" line="39"/>
         <source>Unknown Artist</source>
-        <translation>Unbekannte Künstler</translation>
+        <translation type="unfinished">Unbekannte Künstler</translation>
     </message>
 </context>
 </TS>
