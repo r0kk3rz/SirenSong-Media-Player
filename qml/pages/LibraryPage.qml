@@ -8,6 +8,7 @@ Page {
 
     property Component songSelectComponent: Qt.createComponent("SongSelect.qml", Component.Asynchronous)
     property Component artistSelectComponent: Qt.createComponent("ArtistSelect.qml", Component.Asynchronous)
+    property Component searchSelectComponent: Qt.createComponent("SearchSelect.qml", Component.Asynchronous)
     property int defaultLibraryMenu: settings.value("defaultLibraryMenu")
 
     property string launchArgs: Qt.resolvedUrl(Qt.application.arguments[1]);
@@ -70,15 +71,15 @@ Page {
 
         // pull down for different library menus
         PullDownMenu {
-            /*
-            MenuItem {
-                text: qsTr("Search")
-                onClicked: browser.source = "SearchSelect.qml"
-            } */
 
             MenuItem {
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+
+            MenuItem {
+                text: qsTr("Search")
+                onClicked: browser.sourceComponent = searchSelectComponent
             }
 
             MenuItem {
