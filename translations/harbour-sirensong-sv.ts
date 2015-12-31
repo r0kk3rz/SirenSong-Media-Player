@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
 <context>
     <name>LibraryPage</name>
     <message>
@@ -21,7 +19,7 @@
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök</translation>
     </message>
 </context>
 <context>
@@ -86,11 +84,11 @@
     <name>SongItem</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation type="unfinished">Lägg till i uppspelningskön</translation>
+        <translation>Lägg till i uppspelningskön</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Okänd artist</translation>
+        <translation>Okänd artist</translation>
     </message>
 </context>
 </TS>

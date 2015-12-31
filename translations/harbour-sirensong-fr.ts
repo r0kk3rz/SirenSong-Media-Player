@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>LibraryPage</name>
     <message>
         <source>Sort by Artist</source>
-        <translation>Trier par artiste</translation>
+        <translation>Tri par artiste</translation>
     </message>
     <message>
         <source>Sort by Song</source>
-        <translation>Trier par titre</translation>
+        <translation>Tri par titre</translation>
     </message>
     <message>
         <source>Library</source>
@@ -21,7 +19,7 @@
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Chercher</translation>
     </message>
 </context>
 <context>
@@ -44,53 +42,53 @@
     </message>
     <message>
         <source>Clear Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Clear Playlist</translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
-        <source>Save</source>
-        <translation>Sauvegarder</translation>
-    </message>
-    <message>
-        <source>Play Mode</source>
-        <translation>Mode de lecture</translation>
+        <source>Repeat</source>
+        <translation>Répéter</translation>
     </message>
     <message>
         <source>Auto Queue</source>
         <translation>Aléatoire</translation>
     </message>
     <message>
-        <source>Repeat</source>
-        <translation>Répéter</translation>
-    </message>
-    <message>
         <source>Default Library Menu</source>
         <translation>Menu bibliothèque par défaut</translation>
     </message>
     <message>
-        <source>Sort by Song</source>
-        <translation>Trier par titre</translation>
+        <source>Sort by Artist</source>
+        <translation>Tri par artiste</translation>
     </message>
     <message>
-        <source>Sort by Artist</source>
-        <translation>Trier par artiste</translation>
+        <source>Play Mode</source>
+        <translation>Mode de lecture</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <source>Sort by Song</source>
+        <translation>Tri par titre</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation>Aléatoire</translation>
     </message>
 </context>
 <context>
     <name>SongItem</name>
     <message>
         <source>Add to Play Queue</source>
-        <translation type="unfinished">Ajouter à la liste de lecture</translation>
+        <translation>Ajouter à la liste de lecture</translation>
     </message>
     <message>
         <source>Unknown Artist</source>
-        <translation type="unfinished">Artiste inconnu</translation>
+        <translation>Artiste inconnu</translation>
     </message>
 </context>
 </TS>
